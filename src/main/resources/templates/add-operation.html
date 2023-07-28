@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add expense</title>
+</head>
+<body>
+    <div>Uzupewnij formularz:</div>
+    <br>
+    <form action="/add-operation" method="post">
+        <label>Podaj typ operacii</label>
+        <select id="operationType" name="operationType">
+            <option value="INCOME">Income</option>
+            <option value="EXPENSE">Expense</option>
+        </select>
+        <label>Podaj kwotę</label>
+        <input type="number" name="amount">
+        <label>Podaj datę</label>
+        <input type="date" name="date">
+        <label>Podaj kategorię</label>
+        <input type="text" name="category">
+        <button type="submit">Dodaj</button>
+    </form>
+    <br>
+    <a href="/">Cofnij</a>
+</body>
+</html>

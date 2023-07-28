@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of operations</title>
+    <style>
+        td, th {
+            padding: 10px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Category</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Используем Thymeleaf для вывода данных из списка "items" -->
+    <tr th:each="operation : ${operations}">
+        <td th:text="${operation.date}"></td>
+        <td th:text="${operation.amount}"></td>
+        <td th:text="${operation.category}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
