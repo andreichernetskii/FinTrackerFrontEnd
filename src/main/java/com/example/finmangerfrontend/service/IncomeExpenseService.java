@@ -27,14 +27,14 @@ public class IncomeExpenseService {
         ParameterizedTypeReference<List<IncomeExpenseManager>> responseType =
                 new ParameterizedTypeReference<List<IncomeExpenseManager>>() {};
 
-        // Выполните GET-запрос с использованием объекта ParameterizedTypeReference
+        // GET-request to DB
         ResponseEntity<List<IncomeExpenseManager>> response =
                 restTemplate.exchange("http://localhost:8080/api/v1/incomes-expenses/operations",
                         HttpMethod.GET,
                         null,
                         responseType);
 
-        // Получите список объектов из ResponseEntity
+        // list of object from response body
         List<IncomeExpenseManager> operations = response.getBody();
 
         // Теперь у вас есть список объектов, который можно использовать
