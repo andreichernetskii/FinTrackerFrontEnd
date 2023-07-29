@@ -14,19 +14,31 @@
 <table>
     <thead>
     <tr>
+        <th>Id</th>
         <th>Date</th>
         <th>Amount</th>
         <th>Category</th>
     </tr>
     </thead>
     <tbody>
-    <!-- Используем Thymeleaf для вывода данных из списка "items" -->
+<!--    for Thymleaf:-->
     <tr th:each="operation : ${operations}">
+        <td th:text="${operation.id}"></td>
         <td th:text="${operation.date}"></td>
         <td th:text="${operation.amount}"></td>
         <td th:text="${operation.category}"></td>
     </tr>
     </tbody>
 </table>
+<br>
+<br>
+<br>
+<h2>Waaaaaaaaaaaaaaaaaaaaaagh!!1</h2>
+<br>
+    <form action="/operations" method="post">
+        <label>Usuwanie za pomocą Id:</label>
+        <input type="number" name="id">
+        <button type="submit">Usuń</button>
+    </form>
 </body>
 </html>

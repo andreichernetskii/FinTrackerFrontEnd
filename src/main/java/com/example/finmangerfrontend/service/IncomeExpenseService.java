@@ -23,7 +23,6 @@ public class IncomeExpenseService {
     }
 
     public List<IncomeExpenseManager> getOperations() {
-        System.out.println("Sending request");
         ParameterizedTypeReference<List<IncomeExpenseManager>> responseType =
                 new ParameterizedTypeReference<List<IncomeExpenseManager>>() {};
 
@@ -37,7 +36,15 @@ public class IncomeExpenseService {
         // list of object from response body
         List<IncomeExpenseManager> operations = response.getBody();
 
-        // Теперь у вас есть список объектов, который можно использовать
         return operations;
+    }
+
+    public void deleteOperation(Long id) {
+        ResponseEntity<Void> response = restTemplate.exchange(
+                "http://localhost:8080/api/v1/incomes-expenses/operations/" + id,
+                HttpMethod.DELETE,
+                null,
+                Void.class
+        );
     }
 }
