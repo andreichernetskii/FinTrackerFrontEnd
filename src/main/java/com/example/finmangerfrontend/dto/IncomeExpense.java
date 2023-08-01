@@ -2,17 +2,17 @@ package com.example.finmangerfrontend.dto;
 
 import java.math.BigDecimal;
 
-public class IncomeExpenseManager {
+public class IncomeExpense {
     private Long id;
     private OperationType operationType;
     private BigDecimal amount;
     private String category;
     private String date; // todo: konwersia do odpowiedniego formatu: Date albo LocalDate
 
-    public IncomeExpenseManager() {
+    public IncomeExpense() {
     }
 
-    public IncomeExpenseManager(Long id, OperationType operationType, BigDecimal amount, String category, String date) {
+    public IncomeExpense(Long id, OperationType operationType, BigDecimal amount, String category, String date) {
         this.id = id;
         this.operationType = operationType;
         this.amount = amount;
