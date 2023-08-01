@@ -4,41 +4,63 @@
     <meta charset="UTF-8">
     <title>List of operations</title>
     <style>
+        table {
+            width: 35%;
+            float: left;
+        }
         td, th {
             padding: 10px;
             border: 1px solid black;
         }
+        .other-content {
+            width: 50%;
+            float: right;
+        }
+        .clear {
+            clear: both;
+        }
     </style>
 </head>
 <body>
-<table>
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Date</th>
-        <th>Amount</th>
-        <th>Category</th>
-    </tr>
-    </thead>
-    <tbody>
-<!--    for Thymleaf:-->
-    <tr th:each="operation : ${operations}">
-        <td th:text="${operation.id}"></td>
-        <td th:text="${operation.date}"></td>
-        <td th:text="${operation.amount}"></td>
-        <td th:text="${operation.category}"></td>
-    </tr>
-    </tbody>
-</table>
-<br>
-<br>
-<br>
-<h2>Waaaaaaaaaaaaaaaaaaaaaagh!!1</h2>
-<br>
-    <form action="/operations" method="post">
-        <label>Usuwanie za pomocą Id:</label>
-        <input type="number" name="id">
-        <button type="submit">Usuń</button>
-    </form>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Category</th>
+        </tr>
+        </thead>
+        <tbody>
+    <!--    for Thymleaf:-->
+        <tr th:each="operation : ${operations}">
+            <td th:text="${operation.id}"></td>
+            <td th:text="${operation.date}"></td>
+            <td th:text="${operation.amount}"></td>
+            <td th:text="${operation.category}"></td>
+            <td>
+                <form th:action="@{/delete}" method="post">
+                    <input type="hidden" name="id" th:value="${operation.id}" />
+                    <button type="submit" th:attr="data-id=${operation.id}" onclick="return confirm('Czy jesteś pewien/pewna, że chcesz usunąć operację z id: ' + this.getAttribute('data-id') + '?')">Usunąć</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <br>
+    <br>
+    <br>
+    <div class="other-content">
+        <h2>Waaaaaaaaaaaaaaaaaaaaaagh!!1</h2>
+        <br>
+        <form action="/operations" method="post">
+            <label>Usuwanie za pomocą Id:</label>
+            <input type="number" name="id">
+            <button type="submit">Usuń</button>
+        </form>
+    </div>
+    <div class="clear"></div>
 </body>
 </html>

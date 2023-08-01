@@ -36,8 +36,8 @@ public class IncomeExpenseController {
         return "operations.html";
     }
 
-    @PostMapping("/operations")
-    public String deleteOperation( Long id) {
+    @PostMapping("/delete")
+    public String deleteOperation(Long id) {
         incomeExpenseService.deleteOperation(id);
         return "redirect:/operations";
     }
