@@ -28,6 +28,12 @@ public class IncomeExpenseController {
         return "redirect:/"; // here we are returning to main page without any repeated "calculations"
     }
 
+    @PostMapping("/update-operation")
+    public String updateIncomeExpense(IncomeExpense incomeExpense) {
+        incomeExpenseService.updateIncomeExpense(incomeExpense);
+        return "redirect:/operations";
+    }
+
     @GetMapping("/operations")
     public String showOperations(Model model) {
         List<IncomeExpense> operations = incomeExpenseService.getOperations();

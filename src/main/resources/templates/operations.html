@@ -3,23 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>List of operations</title>
-    <style>
-        table {
-            width: 35%;
-            float: left;
-        }
-        td, th {
-            padding: 10px;
-            border: 1px solid black;
-        }
-        .other-content {
-            width: 50%;
-            float: right;
-        }
-        .clear {
-            clear: both;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
     <table>
@@ -39,15 +23,44 @@
             <td th:text="${operation.amount}"></td>
             <td th:text="${operation.category}"></td>
             <td>
+                <button class="editBtn btnWithImage" id="editBtn" title="Edytuj" th:attr="data-id=${operation.id}, data-operationType=${operation.operationType}, data-amount=${operation.amount}, data-date=${operation.date}, data-category=${operation.category}"></button>
+            </td>
+            <td>
                 <form th:action="@{/delete}" method="post">
                     <input type="hidden" name="id" th:value="${operation.id}" />
-                    <button type="submit" th:attr="data-id=${operation.id}" onclick="return confirm('Czy jesteś pewien/pewna, że chcesz usunąć operację z id: ' + this.getAttribute('data-id') + '?')">Usunąć</button>
+                    <button type="submit" class="btnWithImage" id="deleteBtn" th:attr="data-id=${operation.id}" onclick="return confirm('Czy jesteś pewien/pewna, że chcesz usunąć operację z id: ' + this.getAttribute('data-id') + '?')" title="Usuń"></button>
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
+    <div id="dialog" class="hidden">
+        <h2>Eycja operacji:</h2>
+        <form action="update-operation" method="post">
+            <label>Id operacii</label>
+            <input type="number" name="Id" id="id" readonly>
 
+            <label>Typ operacii:</label>
+            <select id="operationType" name="operationType">
+                <option value="INCOME">Income</option>
+                <option value="EXPENSE">Expense</option>
+            </select>
+
+            <label>Kwota</label>
+            <input type="number" name="amount" id="amount">
+
+            <label>Data</label>
+            <input type="date" name="date" id="date">
+
+            <label>Kategoria</label>
+            <input type="text" name="category" id="category">
+
+            <button type="submit">Edytuj</button>
+            <button id="cancelDialogBtn" type="button">Cofnij</button>
+        </form>
+    </div>
+
+    <script src="/static/script.js"></script>
 
     <br>
     <br>

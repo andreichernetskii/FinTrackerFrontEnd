@@ -49,4 +49,8 @@ public class IncomeExpenseService {
 //        );
         restTemplate.delete("http://localhost:8080/api/v1/incomes-expenses/operations/" + id);
     }
+
+    public void updateIncomeExpense(IncomeExpense incomeExpense) {
+        restTemplate.put("http://localhost:8080/api/v1/incomes-expenses/operations/update-operation", incomeExpense);
+    }
 }
