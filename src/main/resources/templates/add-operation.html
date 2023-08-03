@@ -9,19 +9,20 @@
     <br>
     <form action="/add-operation" method="post">
         <label>Podaj typ operacii</label>
-        <select id="operationType" name="operationType">
+        <select id="operationType" name="operationType" required>
+            <option value="" disabled selected>Typ operacji</option>
             <option value="INCOME">Income</option>
             <option value="EXPENSE">Expense</option>
         </select>
 
         <label>Podaj kwotę</label>
-        <input type="number" name="amount">
+        <input type="number" name="amount" required>
 
         <label>Podaj datę</label>
-        <input type="date" name="date">
+        <input type="date" name="date" required>
 
         <label>Podaj kategorię</label>
-        <input type="text" name="category">
+        <input type="text" name="category" required>
 
         <button type="submit">Dodaj</button>
     </form>
