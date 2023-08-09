@@ -34,6 +34,9 @@
         </tr>
         </tbody>
     </table>
+
+<!--    Pole edycji danych-->
+
     <div id="dialog" class="hidden">
         <h2>Eycja operacji:</h2>
         <form action="update-operation" method="post">
@@ -47,7 +50,7 @@
             </select>
 
             <label>Kwota</label>
-            <input type="number" name="amount" id="amount" required>
+            <input type="number" step="any" name="amount" id="amount" required>
 
             <label>Data</label>
             <input type="date" name="date" id="date" required>
@@ -65,13 +68,20 @@
     <br>
     <br>
     <br>
+
+<!--    Formy filtrów-->
+
     <div class="other-content">
-        <h2>Waaaaaaaaaaaaaaaaaaaaaagh!!1</h2>
+        <h2>Statystyka</h2>
         <br>
-        <form action="/operations" method="post">
-            <label>Usuwanie za pomocą Id:</label>
-            <input type="number" name="id">
-            <button type="submit">Usuń</button>
+        <form action="/operations-statistics" method="get">
+            <label>Rok</label>
+            <input type="number" name="year" id="year">
+
+            <label>Miesiąc</label>
+            <input type="number" name="month" id="month">
+
+            <button id="submitStatsBtn" type="submit">Zastosuj</button>
         </form>
     </div>
     <div class="clear"></div>

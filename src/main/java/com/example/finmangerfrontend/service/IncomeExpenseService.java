@@ -19,38 +19,35 @@ public class IncomeExpenseService {
     }
 
     public List<IncomeExpense> getOperations() {
-//        ParameterizedTypeReference<List<IncomeExpenseManager>> responseType =
-//                new ParameterizedTypeReference<List<IncomeExpenseManager>>() {};
+        List<IncomeExpense> response = restTemplate.getForObject("http://localhost:8080/api/v1/incomes-expenses/operations", List.class);
+        return response;
+    }
 
-        // GET-request to DB
-//        ResponseEntity<List<IncomeExpenseManager>> response =
-//                restTemplate.exchange("http://localhost:8080/api/v1/incomes-expenses/operations",
-//                        HttpMethod.GET,
-//                        null,
-//                        responseType);
+    public List<IncomeExpense> getOperationsYearAndMonth(int year, int month) {
+        String url = "http://localhost:8080/api/v1/incomes-expenses/operations/statistics" + "?year=" + year + "&month=" + month;
+        List<IncomeExpense> response = restTemplate.getForObject(url, List.class);
+        return response;
+    }
 
-       List<IncomeExpense> response=
-                restTemplate.getForObject("http://localhost:8080/api/v1/incomes-expenses/operations",
-                        List.class);
+    public List<IncomeExpense> getOperationsMonth(int month) {
+        String url = "http://localhost:8080/api/v1/incomes-expenses/operations/statistics" + "?month=" + month;
+        List<IncomeExpense> response = restTemplate.getForObject(url, List.class);
+        return response;
+    }
 
-        // list of object from response body
-//        List<IncomeExpenseManager> operations = response.getBody();
-
-      //  return operations;
+    public List<IncomeExpense> getOperationsYear(int year) {
+        String url = "http://localhost:8080/api/v1/incomes-expenses/operations/statistics" + "?year=" + year;
+        List<IncomeExpense> response = restTemplate.getForObject(url, List.class);
         return response;
     }
 
     public void deleteOperation(Long id) {
-//        ResponseEntity<Void> response = restTemplate.exchange(
-//                "http://localhost:8080/api/v1/incomes-expenses/operations/" + id,
-//                HttpMethod.DELETE,
-//                null,
-//                Void.class
-//        );
         restTemplate.delete("http://localhost:8080/api/v1/incomes-expenses/operations/" + id);
     }
 
     public void updateIncomeExpense(IncomeExpense incomeExpense) {
         restTemplate.put("http://localhost:8080/api/v1/incomes-expenses/operations/update-operation", incomeExpense);
     }
+
+
 }
