@@ -1,10 +1,14 @@
 package com.example.finmangerfrontend.service;
 
 import com.example.finmangerfrontend.dto.IncomeExpense;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class IncomeExpenseService {
@@ -50,4 +54,16 @@ public class IncomeExpenseService {
     }
 
 
+    public List<IncomeExpense> getOperationsVersionMap(Map<String, String> paramsMap) {
+        String url = "http://localhost:8080/api/v1/incomes-expenses/operations/statistics?";
+        StringBuilder stringBuilder = new StringBuilder(url);
+        for (Map.Entry<String, String> pair: paramsMap.entrySet()) {
+            String paramName = String.format("%s", pair.getKey());
+            stringBuilder.append(paramName + "=" + pair.getValue() + "&");
+        }
+        String urlResult = stringBuilder.toString();
+        List<IncomeExpense> response = restTemplate.getForObject(urlResult, List.class);
+
+        return response;
+    }
 }

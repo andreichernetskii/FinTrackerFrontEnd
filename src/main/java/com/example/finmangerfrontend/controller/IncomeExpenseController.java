@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class IncomeExpenseController {
@@ -30,15 +32,33 @@ public class IncomeExpenseController {
         return "operations.html";
     }
 
+//    @GetMapping("/operations-statistics")
+//    public String showOperationsByDemand(Model model,
+//                                         @RequestParam(required = false) String year,
+//                                         @RequestParam(required = false) String month
+//                                         ) {
+//        List<IncomeExpense> operations;
+//        if ((year == null || year.isEmpty()) && (month == null || month.isEmpty())) operations = incomeExpenseService.getOperations();
+//        else if (year == null || year.isEmpty()) operations = incomeExpenseService.getOperationsMonth(Integer.parseInt(month));
+//        else if (month == null || month.isEmpty()) operations = incomeExpenseService.getOperationsYear(Integer.parseInt(year));
+//        else operations = incomeExpenseService.getOperationsYearAndMonth(Integer.parseInt(year), Integer.parseInt(month));
+//        model.addAttribute("operations", operations);
+//        return "operations.html";
+//    }
+
     @GetMapping("/operations-statistics")
-    public String showOperationsByDemand(Model model,
-                                         @RequestParam(required = false) String year,
-                                         @RequestParam(required = false) String month) {
+    public String showOperationsByDemandVersionMap(Model model,
+                                                   @RequestParam(required = false) String year,
+                                                   @RequestParam(required = false) String month,
+                                                   @RequestParam(required = false) String operationType) {
+        Map<String, String> paramsMap = new HashMap<>();
         List<IncomeExpense> operations;
-        if ((year == null || year.isEmpty()) && (month == null || month.isEmpty())) operations = incomeExpenseService.getOperations();
-        else if (year == null || year.isEmpty()) operations = incomeExpenseService.getOperationsMonth(Integer.parseInt(month));
-        else if (month == null || month.isEmpty()) operations = incomeExpenseService.getOperationsYear(Integer.parseInt(year));
-        else operations = incomeExpenseService.getOperationsYearAndMonth(Integer.parseInt(year), Integer.parseInt(month));
+        if ( year != null && !year.equals("") ) paramsMap.put("year", year);
+        if ( month != null && !month.equals("") ) paramsMap.put("month", month);
+        if ( operationType != null ) paramsMap.put("operationType", operationType);
+        if (paramsMap.isEmpty()) operations = incomeExpenseService.getOperations();
+        operations = incomeExpenseService.getOperationsVersionMap(paramsMap);
+
         model.addAttribute("operations", operations);
         return "operations.html";
     }

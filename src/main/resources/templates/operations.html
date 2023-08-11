@@ -45,6 +45,7 @@
 
             <label>Typ operacii:</label>
             <select id="operationType" name="operationType">
+                <option value="" disabled selected>Typ operacji</option>
                 <option value="INCOME">Income</option>
                 <option value="EXPENSE">Expense</option>
             </select>
@@ -80,6 +81,13 @@
 
             <label>Miesiąc</label>
             <input type="number" name="month" id="month">
+
+            <label>Typ operacii:</label>
+            <select name="operationType" id="operationTypeFilter">
+                <option value="" disabled selected>Typ operacji</option>
+                <option value="INCOME">Income</option>
+                <option value="EXPENSE">Expense</option>
+            </select>
 
             <button id="submitStatsBtn" type="submit">Zastosuj</button>
         </form>
