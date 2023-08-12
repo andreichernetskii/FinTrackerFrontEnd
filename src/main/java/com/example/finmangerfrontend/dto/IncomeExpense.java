@@ -12,7 +12,7 @@ public class IncomeExpense {
     public IncomeExpense() {
     }
 
-    public IncomeExpense(Long id, OperationType operationType, BigDecimal amount, String category, String date) {
+    public IncomeExpense( Long id, OperationType operationType, BigDecimal amount, String category, String date ) {
         this.id = id;
         this.operationType = operationType;
         this.amount = amount;
@@ -44,23 +44,23 @@ public class IncomeExpense {
 
     // setter'y są potrzebne dla biblioteki Thymeleaf:
 
-    public void setId(Long id) {
+    public void setId( Long id ) {
         this.id = id;
     }
 
-    public void setOperationType(OperationType operationType) {
+    public void setOperationType( OperationType operationType ) {
         this.operationType = operationType;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount( BigDecimal amount ) {
         this.amount = amount;
     }
 
-    public void setCategory(String category) {
+    public void setCategory( String category ) {
         this.category = category;
     }
 
-    public void setDate(String date) {
+    public void setDate( String date ) {
         this.date = date;
     }
 

@@ -14,55 +14,55 @@ import java.util.Map;
 public class IncomeExpenseService {
     private RestTemplate restTemplate;
 
-    public IncomeExpenseService(RestTemplate restTemplate) {
+    public IncomeExpenseService( RestTemplate restTemplate ) {
         this.restTemplate = restTemplate;
     }
 
-    public void sendNewIncomeExpense(IncomeExpense incomeExpense) {
-        restTemplate.postForEntity("http://localhost:8080/api/v1/incomes-expenses", incomeExpense, String.class);
+    public void sendNewIncomeExpense( IncomeExpense incomeExpense ) {
+        restTemplate.postForEntity( "http://localhost:8080/api/v1/incomes-expenses", incomeExpense, String.class );
     }
 
     public List<IncomeExpense> getOperations() {
-        List<IncomeExpense> response = restTemplate.getForObject("http://localhost:8080/api/v1/incomes-expenses/operations", List.class);
+        List<IncomeExpense> response = restTemplate.getForObject( "http://localhost:8080/api/v1/incomes-expenses/operations", List.class );
         return response;
     }
 
-    public List<IncomeExpense> getOperationsYearAndMonth(int year, int month) {
+    public List<IncomeExpense> getOperationsYearAndMonth( int year, int month ) {
         String url = "http://localhost:8080/api/v1/incomes-expenses/operations/statistics" + "?year=" + year + "&month=" + month;
-        List<IncomeExpense> response = restTemplate.getForObject(url, List.class);
+        List<IncomeExpense> response = restTemplate.getForObject( url, List.class );
         return response;
     }
 
-    public List<IncomeExpense> getOperationsMonth(int month) {
+    public List<IncomeExpense> getOperationsMonth( int month ) {
         String url = "http://localhost:8080/api/v1/incomes-expenses/operations/statistics" + "?month=" + month;
-        List<IncomeExpense> response = restTemplate.getForObject(url, List.class);
+        List<IncomeExpense> response = restTemplate.getForObject( url, List.class );
         return response;
     }
 
-    public List<IncomeExpense> getOperationsYear(int year) {
+    public List<IncomeExpense> getOperationsYear( int year ) {
         String url = "http://localhost:8080/api/v1/incomes-expenses/operations/statistics" + "?year=" + year;
-        List<IncomeExpense> response = restTemplate.getForObject(url, List.class);
+        List<IncomeExpense> response = restTemplate.getForObject( url, List.class );
         return response;
     }
 
-    public void deleteOperation(Long id) {
-        restTemplate.delete("http://localhost:8080/api/v1/incomes-expenses/operations/" + id);
+    public void deleteOperation( Long id ) {
+        restTemplate.delete( "http://localhost:8080/api/v1/incomes-expenses/operations/" + id );
     }
 
-    public void updateIncomeExpense(IncomeExpense incomeExpense) {
-        restTemplate.put("http://localhost:8080/api/v1/incomes-expenses/operations/update-operation", incomeExpense);
+    public void updateIncomeExpense( IncomeExpense incomeExpense ) {
+        restTemplate.put( "http://localhost:8080/api/v1/incomes-expenses/operations/update-operation", incomeExpense );
     }
 
 
-    public List<IncomeExpense> getOperationsVersionMap(Map<String, String> paramsMap) {
+    public List<IncomeExpense> getOperationsVersionMap( Map<String, String> paramsMap ) {
         String url = "http://localhost:8080/api/v1/incomes-expenses/operations/statistics?";
-        StringBuilder stringBuilder = new StringBuilder(url);
-        for (Map.Entry<String, String> pair: paramsMap.entrySet()) {
-            String paramName = String.format("%s", pair.getKey());
-            stringBuilder.append(paramName + "=" + pair.getValue() + "&");
+        StringBuilder stringBuilder = new StringBuilder( url );
+        for ( Map.Entry<String, String> pair : paramsMap.entrySet() ) {
+            String paramName = String.format( "%s", pair.getKey() );
+            stringBuilder.append( paramName + "=" + pair.getValue() + "&" );
         }
         String urlResult = stringBuilder.toString();
-        List<IncomeExpense> response = restTemplate.getForObject(urlResult, List.class);
+        List<IncomeExpense> response = restTemplate.getForObject( urlResult, List.class );
 
         return response;
     }
