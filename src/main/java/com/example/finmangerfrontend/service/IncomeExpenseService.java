@@ -1,14 +1,12 @@
 package com.example.finmangerfrontend.service;
 
+import com.example.finmangerfrontend.dto.FilterParameters;
 import com.example.finmangerfrontend.dto.IncomeExpense;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class IncomeExpenseService {
@@ -27,24 +25,6 @@ public class IncomeExpenseService {
         return response;
     }
 
-    public List<IncomeExpense> getOperationsYearAndMonth( int year, int month ) {
-        String url = "http://localhost:8080/api/v1/incomes-expenses/operations/statistics" + "?year=" + year + "&month=" + month;
-        List<IncomeExpense> response = restTemplate.getForObject( url, List.class );
-        return response;
-    }
-
-    public List<IncomeExpense> getOperationsMonth( int month ) {
-        String url = "http://localhost:8080/api/v1/incomes-expenses/operations/statistics" + "?month=" + month;
-        List<IncomeExpense> response = restTemplate.getForObject( url, List.class );
-        return response;
-    }
-
-    public List<IncomeExpense> getOperationsYear( int year ) {
-        String url = "http://localhost:8080/api/v1/incomes-expenses/operations/statistics" + "?year=" + year;
-        List<IncomeExpense> response = restTemplate.getForObject( url, List.class );
-        return response;
-    }
-
     public void deleteOperation( Long id ) {
         restTemplate.delete( "http://localhost:8080/api/v1/incomes-expenses/operations/" + id );
     }
@@ -53,17 +33,16 @@ public class IncomeExpenseService {
         restTemplate.put( "http://localhost:8080/api/v1/incomes-expenses/operations/update-operation", incomeExpense );
     }
 
+    public List<IncomeExpense> getOperations( FilterParameters filterParameters ) {
+        String filter = filterParameters.getParamsAsURL();
+        String url = "http://localhost:8080/api/v1/incomes-expenses/operations/statistics?" + filter;
+        List<IncomeExpense> response = restTemplate.getForObject( url, List.class );
+        return response;
+    }
 
-    public List<IncomeExpense> getOperationsVersionMap( Map<String, String> paramsMap ) {
-        String url = "http://localhost:8080/api/v1/incomes-expenses/operations/statistics?";
-        StringBuilder stringBuilder = new StringBuilder( url );
-        for ( Map.Entry<String, String> pair : paramsMap.entrySet() ) {
-            String paramName = String.format( "%s", pair.getKey() );
-            stringBuilder.append( paramName + "=" + pair.getValue() + "&" );
-        }
-        String urlResult = stringBuilder.toString();
-        List<IncomeExpense> response = restTemplate.getForObject( urlResult, List.class );
-
+    public Double getAnnualBalance( FilterParameters filterParameters ) {
+        String url = "http://localhost:8080/api/v1/incomes-expenses/operations/annual?" + filterParameters.getParamsAsURL();
+        Double response = restTemplate.getForObject( url, Double.class );
         return response;
     }
 }

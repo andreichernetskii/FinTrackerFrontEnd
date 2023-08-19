@@ -27,15 +27,8 @@ document.querySelectorAll('.editBtn').forEach((btn) => {
     });
 });
 
-// by pressing submit dialog window will be closed
-document.querySelector('form').addEventListener('submit', (event) => {
-    event.preventDefault();
-    dialog.classList.add('hidden');
-});
-
 // by pressing the cancel button dialog window will be closed
 document.getElementById('cancelDialogBtn').addEventListener('click', (event) => {
-    event.preventDefault();
     dialog.classList.add('hidden');
 });
 

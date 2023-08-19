@@ -16,7 +16,7 @@
         </tr>
         </thead>
         <tbody>
-    <!--    for Thymleaf:-->
+<!--    for Thymleaf:-->
         <tr th:each="operation : ${operations}">
             <td th:text="${operation.id}"></td>
             <td th:text="${operation.date}"></td>
@@ -28,7 +28,9 @@
             <td>
                 <form th:action="@{/delete}" method="post">
                     <input type="hidden" name="id" th:value="${operation.id}" />
-                    <button type="submit" class="btnWithImage" id="deleteBtn" th:attr="data-id=${operation.id}" onclick="return confirm('Czy jesteś pewien/pewna, że chcesz usunąć operację z id: ' + this.getAttribute('data-id') + '?')" title="Usuń"></button>
+                    <button type="submit" class="btnWithImage" id="deleteBtn" th:attr="data-id=${operation.id}"
+                            onclick="return confirm('Czy jesteś pewien/pewna, że chcesz usunąć operację z id: ' + this.getAttribute('data-id') + '?')"
+                            title="Usuń"></button>
                 </form>
             </td>
         </tr>
@@ -59,12 +61,14 @@
             <label>Kategoria</label>
             <input type="text" name="category" id="category" required>
 
-            <button type="submit">Edytuj</button>
+            <button id="submitBtn" type="submit">Edytuj</button>
             <button id="cancelDialogBtn" type="button">Cofnij</button>
         </form>
     </div>
 
+<!--    script place-->
     <script src="/static/script.js"></script>
+
 
     <br>
     <br>
@@ -96,6 +100,14 @@
             </select>
 
             <button id="submitStatsBtn" type="submit">Zastosuj</button>
+        </form>
+
+        <br>
+
+        <form action="/operations-annual" method="get">
+            <label>Summa:
+                <span th:value="${totalAmount}" th:text="${totalAmount}"></span>
+            </label>
         </form>
     </div>
     <div class="clear"></div>
