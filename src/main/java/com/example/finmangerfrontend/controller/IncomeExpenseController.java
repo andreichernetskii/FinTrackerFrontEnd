@@ -23,16 +23,16 @@ public class IncomeExpenseController {
         return "add-operation.html";
     }
 
-    @GetMapping( "/operations" )
+  /*  @GetMapping( "/operations" )
     public String showOperations( Model model ) {
         List<IncomeExpense> operations = incomeExpenseService.getOperations();
         Double totalAmount = incomeExpenseService.getAnnualBalance();
         model.addAttribute( "operations", operations );
         model.addAttribute( "totalAmount", totalAmount );
         return "operations.html";
-    }
+    }*/
 
-    @GetMapping( "/operations-statistics" )
+    @GetMapping( "/operations" )
     public String showOperationsByCriteria( Model model, FilterParameters filterParameters ) {
         List<IncomeExpense> operations = incomeExpenseService.getOperations( filterParameters );
         Double totalAmount = incomeExpenseService.getAnnualBalance( filterParameters );
