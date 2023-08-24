@@ -80,23 +80,23 @@
     <div class="other-content">
         <h2>Statystyka</h2>
         <br>
-        <form action="/operations" method="get">
+        <form action="/operations" method="get" th:object="${filter}">
             <label>Rok</label>
-            <input type="number" name="year" id="year">
+            <input type="number"  id="year" th:field="*{year}">
 
             <label>Miesiąc</label>
-            <input type="number" name="month" id="month">
+            <input type="number" id="month" th:field="*{month}">
 
             <label>Typ operacii:</label>
-            <select name="operationType" id="operationTypeFilter">
-                <option value="" disabled selected>Typ operacji</option>
+            <select id="operationTypeFilter" th:field="*{operationType}">
+                <option value="" selected>All</option>
                 <option value="INCOME">Income</option>
                 <option value="EXPENSE">Expense</option>
             </select>
 
             <label>Kategoria:</label>
-            <select name="category" id="categoryFilter">
-                <option value="" disabled selected>Kategoria</option>
+            <select id="categoryFilter" th:field="*{category}">
+                <option value="" selected>All</option>
                 <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
             </select>
 
@@ -108,17 +108,6 @@
                 <span id="totalAmountValue" th:text="${totalAmount}"></span>
             </label>
         </form>
-
-        <br>
-
-<!--        <form action="/operations-annual" method="get">-->
-<!--            <label>Summa:-->
-<!--                <span id="totalAmountValue" th:text="${totalAmount}"></span>-->
-<!--            </label>-->
-<!--            <button type="submit">Oblicz sumę</button>-->
-
-<!--        </form>-->
-
     </div>
     <div class="clear"></div>
     <script src="/static/script.js"></script>
