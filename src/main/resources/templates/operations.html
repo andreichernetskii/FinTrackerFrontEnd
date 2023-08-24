@@ -95,8 +95,12 @@
                 <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
             </select>
 
+            <br>
+            <br>
+
             <button id="submitStatsBtn" type="submit">Zastosuj</button>
 
+            <br>
             <br>
 
             <label>Summa:
@@ -104,13 +108,18 @@
             </label>
         </form>
 
+        <br>
+        <br>
+
+<!--    Alerts field-->
+
         <div th:each="alert : ${alerts}">
             <label th:color="red" th:text="${alert.message}"></label>
         </div>
 
     </div>
 
-<!--    Alerts field-->
+
 
 
 

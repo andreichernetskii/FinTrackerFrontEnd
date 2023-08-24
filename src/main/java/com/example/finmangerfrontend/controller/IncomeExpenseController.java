@@ -24,15 +24,6 @@ public class IncomeExpenseController {
         return "add-operation.html";
     }
 
-  /*  @GetMapping( "/operations" )
-    public String showOperations( Model model ) {
-        List<IncomeExpense> operations = incomeExpenseService.getOperations();
-        Double totalAmount = incomeExpenseService.getAnnualBalance();
-        model.addAttribute( "operations", operations );
-        model.addAttribute( "totalAmount", totalAmount );
-        return "operations.html";
-    }*/
-
     @GetMapping( "/operations" )
     public String showOperationsByCriteria( Model model, FilterParameters filterParameters ) {
         List<IncomeExpense> operations = apiService.getOperations( filterParameters );
@@ -47,13 +38,6 @@ public class IncomeExpenseController {
         model.addAttribute( "alerts", alerts );
         return "operations.html";
     }
-
-//    @GetMapping( "/operations-annual" )
-//    public String showAnnualBalance ( Model model, FilterParameters filterParameters ) {
-//        Double totalAmount = incomeExpenseService.getAnnualBalance( filterParameters );
-//        model.addAttribute( "totalAmount", totalAmount );
-//        return "operations.html";
-//    }
 
     @PostMapping( "/delete" )
     public String deleteOperation( Long id ) {

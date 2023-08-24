@@ -20,11 +20,6 @@ public class ApiService {
         restTemplate.postForEntity( "http://localhost:8080/api/v1/incomes-expenses", incomeExpense, String.class );
     }
 
-    public List<IncomeExpense> getOperations() {
-        List<IncomeExpense> response = restTemplate.getForObject( "http://localhost:8080/api/v1/incomes-expenses/operations", List.class );
-        return response;
-    }
-
     public void deleteOperation( Long id ) {
         restTemplate.delete( "http://localhost:8080/api/v1/incomes-expenses/operations/" + id );
     }
