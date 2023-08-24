@@ -44,5 +44,9 @@ public class IncomeExpenseService {
         String url = "http://localhost:8080/api/v1/incomes-expenses/operations/annual?" + filterParameters.getParamsAsURL();
         Double response = restTemplate.getForObject( url, Double.class );
         return response;
+    }public Double getAnnualBalance( ) {
+        String url = "http://localhost:8080/api/v1/incomes-expenses/operations/annual?";
+        Double response = restTemplate.getForObject( url, Double.class );
+        return response;
     }
 }

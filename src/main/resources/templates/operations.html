@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>List of operations</title>
@@ -67,7 +68,7 @@
     </div>
 
 <!--    script place-->
-    <script src="/static/script.js"></script>
+
 
 
     <br>
@@ -100,16 +101,39 @@
             </select>
 
             <button id="submitStatsBtn" type="submit">Zastosuj</button>
+
+            <br>
+
+            <label>Summa:
+                <span id="totalAmountValue" th:text="${totalAmount}"></span>
+            </label>
         </form>
 
         <br>
 
-        <form action="/operations-annual" method="get">
-            <label>Summa:
-                <span th:value="${totalAmount}" th:text="${totalAmount}"></span>
-            </label>
-        </form>
+<!--        <form action="/operations-annual" method="get">-->
+<!--            <label>Summa:-->
+<!--                <span id="totalAmountValue" th:text="${totalAmount}"></span>-->
+<!--            </label>-->
+<!--            <button type="submit">Oblicz sumę</button>-->
+
+<!--        </form>-->
+
     </div>
     <div class="clear"></div>
+    <script src="/static/script.js"></script>
+<!--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!--    <script src="/static/refreshAmountValue.js"></script>-->
 </body>
 </html>
+
+
+<!--
+sumowanie
+    zawsze tyle samo niezaleznie od filtrów
+kategorie
+    jakie zapytanie ?
+    jak bez javascript
+
+
+-->

@@ -26,23 +26,27 @@ public class IncomeExpenseController {
     @GetMapping( "/operations" )
     public String showOperations( Model model ) {
         List<IncomeExpense> operations = incomeExpenseService.getOperations();
+        Double totalAmount = incomeExpenseService.getAnnualBalance();
         model.addAttribute( "operations", operations );
+        model.addAttribute( "totalAmount", totalAmount );
         return "operations.html";
     }
 
     @GetMapping( "/operations-statistics" )
-    public String showOperationsByDemand( Model model, FilterParameters filterParameters ) {
+    public String showOperationsByCriteria( Model model, FilterParameters filterParameters ) {
         List<IncomeExpense> operations = incomeExpenseService.getOperations( filterParameters );
-        model.addAttribute( "operations", operations );
-        return "operations.html";
-    }
-
-    @GetMapping( "/operations-annual" )
-    public String showAnnualBalance ( Model model, FilterParameters filterParameters ) {
         Double totalAmount = incomeExpenseService.getAnnualBalance( filterParameters );
+        model.addAttribute( "operations", operations );
         model.addAttribute( "totalAmount", totalAmount );
         return "operations.html";
     }
+
+//    @GetMapping( "/operations-annual" )
+//    public String showAnnualBalance ( Model model, FilterParameters filterParameters ) {
+//        Double totalAmount = incomeExpenseService.getAnnualBalance( filterParameters );
+//        model.addAttribute( "totalAmount", totalAmount );
+//        return "operations.html";
+//    }
 
     @PostMapping( "/delete" )
     public String deleteOperation( Long id ) {
@@ -61,6 +65,4 @@ public class IncomeExpenseController {
         incomeExpenseService.updateIncomeExpense( incomeExpense );
         return "redirect:/operations";
     }
-
-
 }
