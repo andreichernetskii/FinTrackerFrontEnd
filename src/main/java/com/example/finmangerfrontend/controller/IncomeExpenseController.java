@@ -36,8 +36,10 @@ public class IncomeExpenseController {
     public String showOperationsByCriteria( Model model, FilterParameters filterParameters ) {
         List<IncomeExpense> operations = incomeExpenseService.getOperations( filterParameters );
         Double totalAmount = incomeExpenseService.getAnnualBalance( filterParameters );
+        List<String> categories = incomeExpenseService.getCategories();
         model.addAttribute( "operations", operations );
         model.addAttribute( "totalAmount", totalAmount );
+        model.addAttribute( "categories", categories );
         return "operations.html";
     }
 

@@ -97,7 +97,7 @@
             <label>Kategoria:</label>
             <select name="category" id="categoryFilter">
                 <option value="" disabled selected>Kategoria</option>
-                <option th:each="operation : ${operations}" th:value="${operation.category}" th:text="${operation.category}"></option>
+                <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
             </select>
 
             <button id="submitStatsBtn" type="submit">Zastosuj</button>
@@ -131,7 +131,7 @@
 <!--
 sumowanie ++
     zawsze tyle samo niezaleznie od filtrów
-kategorie
+kategorie ++
     jakie zapytanie ?
     jak bez javascript
 
