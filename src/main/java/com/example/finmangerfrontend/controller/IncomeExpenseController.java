@@ -1,8 +1,9 @@
 package com.example.finmangerfrontend.controller;
 
+import com.example.finmangerfrontend.dto.Alert;
 import com.example.finmangerfrontend.dto.FilterParameters;
 import com.example.finmangerfrontend.dto.IncomeExpense;
-import com.example.finmangerfrontend.service.IncomeExpenseService;
+import com.example.finmangerfrontend.service.ApiService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +13,10 @@ import java.util.List;
 
 @Controller
 public class IncomeExpenseController {
-    private final IncomeExpenseService incomeExpenseService;
+    private final ApiService apiService;
 
-    public IncomeExpenseController( IncomeExpenseService incomeExpenseService ) {
-        this.incomeExpenseService = incomeExpenseService;
+    public IncomeExpenseController( ApiService apiService ) {
+        this.apiService = apiService;
     }
 
     @GetMapping( "/add-operation" )
@@ -34,13 +35,16 @@ public class IncomeExpenseController {
 
     @GetMapping( "/operations" )
     public String showOperationsByCriteria( Model model, FilterParameters filterParameters ) {
-        List<IncomeExpense> operations = incomeExpenseService.getOperations( filterParameters );
-        Double totalAmount = incomeExpenseService.getAnnualBalance( filterParameters );
-        List<String> categories = incomeExpenseService.getCategories();
+        List<IncomeExpense> operations = apiService.getOperations( filterParameters );
+        Double totalAmount = apiService.getAnnualBalance( filterParameters );
+        List<String> categories = apiService.getCategories();
+        List<Alert> alerts = apiService.getAlerts();
+
         model.addAttribute( "filter", filterParameters );
         model.addAttribute( "operations", operations );
         model.addAttribute( "totalAmount", totalAmount );
         model.addAttribute( "categories", categories );
+        model.addAttribute( "alerts", alerts );
         return "operations.html";
     }
 
@@ -53,19 +57,19 @@ public class IncomeExpenseController {
 
     @PostMapping( "/delete" )
     public String deleteOperation( Long id ) {
-        incomeExpenseService.deleteOperation( id );
+        apiService.deleteOperation( id );
         return "redirect:/operations";
     }
 
     @PostMapping( "/add-operation" )
     public String sendNewIncomeExpense( IncomeExpense incomeExpense ) {
-        incomeExpenseService.sendNewIncomeExpense( incomeExpense );
+        apiService.sendNewIncomeExpense( incomeExpense );
         return "redirect:/"; // here we are returning to main page without any repeated "calculations"
     }
 
     @PostMapping( "/update-operation" )
     public String updateIncomeExpense( IncomeExpense incomeExpense ) {
-        incomeExpenseService.updateIncomeExpense( incomeExpense );
+        apiService.updateIncomeExpense( incomeExpense );
         return "redirect:/operations";
     }
 }

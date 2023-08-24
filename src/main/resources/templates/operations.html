@@ -67,17 +67,12 @@
         </form>
     </div>
 
-<!--    script place-->
 
 
-
-    <br>
-    <br>
-    <br>
+    <div class="other-content">
 
 <!--    Formy filtrów-->
 
-    <div class="other-content">
         <h2>Statystyka</h2>
         <br>
         <form action="/operations" method="get" th:object="${filter}">
@@ -108,21 +103,19 @@
                 <span id="totalAmountValue" th:text="${totalAmount}"></span>
             </label>
         </form>
+
+        <div th:each="alert : ${alerts}">
+            <label th:color="red" th:text="${alert.message}"></label>
+        </div>
+
     </div>
+
+<!--    Alerts field-->
+
+
+
+
     <div class="clear"></div>
     <script src="/static/script.js"></script>
-<!--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
-<!--    <script src="/static/refreshAmountValue.js"></script>-->
 </body>
 </html>
-
-
-<!--
-sumowanie ++
-    zawsze tyle samo niezaleznie od filtrów
-kategorie ++
-    jakie zapytanie ?
-    jak bez javascript
-
-
--->

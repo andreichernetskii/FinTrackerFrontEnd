@@ -1,18 +1,18 @@
 package com.example.finmangerfrontend.service;
 
+import com.example.finmangerfrontend.dto.Alert;
 import com.example.finmangerfrontend.dto.FilterParameters;
 import com.example.finmangerfrontend.dto.IncomeExpense;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Service
-public class IncomeExpenseService {
+public class ApiService {
     private RestTemplate restTemplate;
 
-    public IncomeExpenseService( RestTemplate restTemplate ) {
+    public ApiService( RestTemplate restTemplate ) {
         this.restTemplate = restTemplate;
     }
 
@@ -56,5 +56,10 @@ public class IncomeExpenseService {
         String url = "http://localhost:8080/api/v1/incomes-expenses/categories?";
         List<String> categories = restTemplate.getForObject( url, List.class );
         return categories;
+    }
+
+    public List<Alert> getAlerts() {
+        String url = "http://localhost:8080/api/v1/alerts";
+        return restTemplate.getForObject( url, List.class );
     }
 }
