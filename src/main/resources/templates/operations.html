@@ -114,16 +114,10 @@
 <!--    Alerts field-->
 
         <div th:each="alert : ${alerts}">
-            <label th:color="red" th:text="${alert.message}"></label>
+            <label th:text="${alert.message}"></label>
         </div>
 
     </div>
-
-
-
-
-
-
     <div class="clear"></div>
     <script src="/static/script.js"></script>
 </body>

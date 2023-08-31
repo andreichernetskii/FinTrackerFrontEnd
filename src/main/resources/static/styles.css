@@ -3,6 +3,11 @@ table {
     float: left;
 }
 
+.leftside-content {
+    width: 35%;
+    float: left;
+}
+
 td, th {
     padding: 5px;
     border: 1px solid black;

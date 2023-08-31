@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sterowanie limitami</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+<!--sterowanie limitami-->
+  <h2>Sterowanie limitami</h2>
+  <div class="leftside-content">
+    <div>
+      <p> Ustalić budget:
+      <input placeholder="Wpisz kwotę" type="number">
+      <button type="submit">Ustalić</button>
+    </div>
+    <div>
+      <p> Ustalić limit roczny:
+        <input placeholder="Wpisz kwotę" type="number">
+        <button type="submit">Ustalić</button>
+    </div>
+    <div>
+      <p> Ustalić limit miesięczny:
+        <input placeholder="Wpisz kwotę" type="number">
+        <button type="submit">Ustalić</button>
+    </div>
+    <div>
+      <p> Ustalić limit tygodniowy:
+        <input placeholder="Wpisz kwotę" type="number">
+        <button type="submit">Ustalić</button>
+    </div>
+    <div>
+      <p> Ustalić limit dzienny:
+        <input placeholder="Wpisz kwotę" type="number">
+        <button type="submit">Ustalić</button>
+    </div>
+  </div>
+
+<!--aktualne limity-->
+
+<div class="other-content">
+  <table>
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Rozmiar limitu</th>
+      <th>Typ limitu</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr th:each="limit : ${limits}">
+        <td th:text="${limit.id}"></td>
+        <td th:text="${limit.limitAmount}"></td>
+        <td th:text="${limit.limitType}"></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+</body>
+</html>
