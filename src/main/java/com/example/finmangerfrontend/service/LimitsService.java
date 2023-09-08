@@ -20,7 +20,7 @@ public class LimitsService {
     }
 
     public List<String> getLimitTypes() {
-        String url = "http://localhost:8080/api/v1/limits/limit-types";
+        String url = "http://localhost:8080/api/v1/limits/types";
         return restTemplate.getForObject( url, List.class );
     }
 
