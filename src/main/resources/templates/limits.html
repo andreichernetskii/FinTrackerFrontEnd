@@ -8,33 +8,55 @@
 <body>
 
 <!--sterowanie limitami-->
-  <h2>Sterowanie limitami</h2>
+
+<!--  <h2>Sterowanie limitami</h2>-->
+<!--  <div class="leftside-content">-->
+<!--    <div>-->
+<!--      <p> Ustalić budget:-->
+<!--      <input placeholder="Wpisz kwotę" type="number">-->
+<!--      <button type="submit">Ustalić</button>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      <p> Ustalić limit roczny:-->
+<!--        <input placeholder="Wpisz kwotę" type="number">-->
+<!--        <button type="submit">Ustalić</button>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      <p> Ustalić limit miesięczny:-->
+<!--        <input placeholder="Wpisz kwotę" type="number">-->
+<!--        <button type="submit">Ustalić</button>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      <p> Ustalić limit tygodniowy:-->
+<!--        <input placeholder="Wpisz kwotę" type="number">-->
+<!--        <button type="submit">Ustalić</button>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      <p> Ustalić limit dzienny:-->
+<!--        <input placeholder="Wpisz kwotę" type="number">-->
+<!--        <button type="submit">Ustalić</button>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--sterowanie limitami, wersja skrócona-->
+
   <div class="leftside-content">
-    <div>
-      <p> Ustalić budget:
-      <input placeholder="Wpisz kwotę" type="number">
+    <h3>Ustawienia limitów</h3>
+    <form action="/add-or-update-limit" method="post">
+      <input placeholder="Wpisz kwotę" type="number" step="any" name="limitAmount" required>
+
+      <select id="limitType" name="limitType" required>
+        <option value="" disabled selected>Okres limitu</option>
+        <option th:each="limitType : ${limitTypes}" th:value="${limitType}" th:text="${limitType}"></option>
+      </select>
+
+      <select id="category" name="category">
+        <option value="" selected>Wszystkie kategorii</option>
+        <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
+      </select>
+
       <button type="submit">Ustalić</button>
-    </div>
-    <div>
-      <p> Ustalić limit roczny:
-        <input placeholder="Wpisz kwotę" type="number">
-        <button type="submit">Ustalić</button>
-    </div>
-    <div>
-      <p> Ustalić limit miesięczny:
-        <input placeholder="Wpisz kwotę" type="number">
-        <button type="submit">Ustalić</button>
-    </div>
-    <div>
-      <p> Ustalić limit tygodniowy:
-        <input placeholder="Wpisz kwotę" type="number">
-        <button type="submit">Ustalić</button>
-    </div>
-    <div>
-      <p> Ustalić limit dzienny:
-        <input placeholder="Wpisz kwotę" type="number">
-        <button type="submit">Ustalić</button>
-    </div>
+    </form>
   </div>
 
 <!--aktualne limity-->
@@ -53,6 +75,14 @@
         <td th:text="${limit.id}"></td>
         <td th:text="${limit.limitAmount}"></td>
         <td th:text="${limit.limitType}"></td>
+        <td>
+          <form th:action="@{/delete-limit}" method="post">
+            <input type="hidden" name="id" th:value="${limit.id}" />
+            <button type="submit" class="btnWithImage" id="deleteBtn" th:attr="data-id=${limit.id}"
+                    onclick="return confirm('Czy jesteś pewien/pewna, że chcesz usunąć limit z id: ' + this.getAttribute('data-id') + '?')"
+                    title="Usuń"></button>
+          </form>
+        </td>
       </tr>
     </tbody>
   </table>

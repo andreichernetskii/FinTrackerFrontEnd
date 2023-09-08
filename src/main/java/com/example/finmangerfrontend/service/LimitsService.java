@@ -15,7 +15,21 @@ public class LimitsService {
     }
 
     public List<Limit> getLimits() {
-        String url = "http://localhost:8080/api/v1/limits/all";
+        String url = "http://localhost:8080/api/v1/limits/";
         return restTemplate.getForObject( url, List.class );
+    }
+
+    public List<String> getLimitTypes() {
+        String url = "http://localhost:8080/api/v1/limits/limit-types";
+        return restTemplate.getForObject( url, List.class );
+    }
+
+    public void addOrUpdateLimit( Limit limit ) {
+        String url = "http://localhost:8080/api/v1/limits/";
+        restTemplate.postForEntity( url, limit, String.class );
+    }
+
+    public void deleteLimit( Long id ) {
+        restTemplate.delete( new StringBuilder("http://localhost:8080/api/v1/limits/").append( id ).toString() );
     }
 }
