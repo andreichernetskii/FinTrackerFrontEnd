@@ -1,18 +1,14 @@
 package com.example.finmangerfrontend.service;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -57,9 +53,6 @@ public class UserService implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate( Authentication authentication ) throws AuthenticationException {
-
-        System.out.println("test");
-
         return new Authentication() {
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -100,7 +93,6 @@ public class UserService implements AuthenticationProvider {
 
     @Override
     public boolean supports( Class<?> authentication ) {
-        System.out.println("....");
         return true;
     }
 }
