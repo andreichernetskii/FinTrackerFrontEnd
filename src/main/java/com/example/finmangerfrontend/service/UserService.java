@@ -19,6 +19,7 @@ public class UserService implements AuthenticationProvider {
     RestTemplate restTemplate;
     InMemoryUserDetailsManager manager;
     PasswordEncoder passwordEncoder;
+    PasswordEncoder passwordEncoder1;
     UserDetails user;
 
     // todo: userService robi zapytanie do endpoint LOGIN wstawiając hasło i login
