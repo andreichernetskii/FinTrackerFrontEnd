@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public class LimitsService {
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     public LimitsService( RestTemplate restTemplate ) {
         this.restTemplate = restTemplate;

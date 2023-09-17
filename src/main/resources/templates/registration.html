@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rejestracja nowego użytkownika</title>
+</head>
+<body>
+    <p>
+        Wpisz swój email, wymyślij hasło i naciśnij "Utworzyć" aby zarejestrować nowego użytkownika.
+    </p>
+    <form th:action="@{/registration_new_user}" method="post">
+        <div>
+            <label>Login</label>
+            <input type="text" id="email_input" name="email" placeholder="Wpisz email" required>
+            <label>Password</label>
+            <input type="text" id="password_input" name="password" placeholder="Wpisz hasło" required>
+        </div>
+        <div>
+            <button type="submit" title="Ok">Utworzyć</button>
+        </div>
+    </form>
+</body>
+</html>

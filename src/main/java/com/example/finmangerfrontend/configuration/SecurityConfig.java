@@ -21,15 +21,22 @@ public class SecurityConfig {
     // todo: przeanalizować
     @Bean
     public SecurityFilterChain configureChain( HttpSecurity httpSecurity, UserService userService ) throws Exception {
-        return httpSecurity.csrf( customizer -> customizer.disable() )
+        httpSecurity
+                .csrf( customizer -> customizer.disable() )
                 .headers( customizer -> customizer.disable() )
-                .authorizeHttpRequests( customizer -> customizer.anyRequest().authenticated() )
-                .formLogin(Customizer.withDefaults())
+                .authorizeHttpRequests( customizer ->
+                        customizer.anyRequest().authenticated() )
+                .formLogin( Customizer.withDefaults() )
 //                .httpBasic( Customizer.withDefaults() )
                 .authenticationProvider( userService )
-                .build();
-    }
+//                .formLogin( customizer -> {
+//                    customizer.loginPage( "/login.html" );
+//                    customizer.successForwardUrl( "/limits.html" );
+//                } )
+        ;
 
+        return httpSecurity.build();
+    }
 
 
     @Bean

@@ -16,10 +16,10 @@ import java.util.Collection;
 
 @Service
 public class UserService implements AuthenticationProvider {
-    RestTemplate restTemplate;
-    InMemoryUserDetailsManager manager;
-    PasswordEncoder passwordEncoder;
-    UserDetails user;
+    private final RestTemplate restTemplate;
+    private final InMemoryUserDetailsManager manager;
+    private PasswordEncoder passwordEncoder;
+    private UserDetails user;
 
     // todo: userService robi zapytanie do endpoint LOGIN wstawiając hasło i login
     // jeśli bląd to AuthentificationFalse,
@@ -35,7 +35,7 @@ public class UserService implements AuthenticationProvider {
     }
 
     public InMemoryUserDetailsManager configureUserManager( PasswordEncoder passEncoder) {
-         user = new User( "user1", passEncoder.encode( "123" ), new ArrayList<>() );
+        user = new User( "user1", passEncoder.encode( "123" ), new ArrayList<>() );
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager( user );
         return manager;
     }
@@ -91,6 +91,8 @@ public class UserService implements AuthenticationProvider {
         };
     }
 
+//    This function is used to check if the particular authentication type is supported by our AuthenticationProvider
+//    implementation class. If it is supported it returns true or else false.
     @Override
     public boolean supports( Class<?> authentication ) {
         return true;

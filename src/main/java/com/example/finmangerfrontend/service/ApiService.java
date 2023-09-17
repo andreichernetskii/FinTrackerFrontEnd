@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class ApiService {
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     public ApiService( RestTemplate restTemplate ) {
         this.restTemplate = restTemplate;
