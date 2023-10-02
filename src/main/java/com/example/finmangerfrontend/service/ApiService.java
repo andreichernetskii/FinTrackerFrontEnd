@@ -2,7 +2,7 @@ package com.example.finmangerfrontend.service;
 
 import com.example.finmangerfrontend.dto.Alert;
 import com.example.finmangerfrontend.dto.FilterParameters;
-import com.example.finmangerfrontend.dto.IncomeExpense;
+import com.example.finmangerfrontend.dto.Operation;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,22 +16,22 @@ public class ApiService {
         this.restTemplate = restTemplate;
     }
 
-    public void sendNewIncomeExpense( IncomeExpense incomeExpense ) {
-        restTemplate.postForEntity( "http://localhost:8080/api/v1/incomes-expenses", incomeExpense, String.class );
+    public void sendNewIncomeExpense( Operation operation ) {
+        restTemplate.postForEntity( "http://localhost:8080/api/v1/incomes-expenses", operation, String.class );
     }
 
     public void deleteOperation( Long id ) {
         restTemplate.delete( "http://localhost:8080/api/v1/incomes-expenses/operations/" + id );
     }
 
-    public void updateIncomeExpense( IncomeExpense incomeExpense ) {
-        restTemplate.put( "http://localhost:8080/api/v1/incomes-expenses/operations/update-operation", incomeExpense );
+    public void updateIncomeExpense( Operation operation ) {
+        restTemplate.put( "http://localhost:8080/api/v1/incomes-expenses/operations/update-operation", operation );
     }
 
-    public List<IncomeExpense> getOperations( FilterParameters filterParameters ) {
+    public List<Operation> getOperations( FilterParameters filterParameters ) {
         String filter = filterParameters.getParamsAsURL();
         String url = "http://localhost:8080/api/v1/incomes-expenses/operations/statistics?" + filter;
-        List<IncomeExpense> response = restTemplate.getForObject( url, List.class );
+        List<Operation> response = restTemplate.getForObject( url, List.class );
         return response;
     }
 
@@ -54,7 +54,7 @@ public class ApiService {
     }
 
     public List<Alert> getAlerts() {
-        String url = "http://localhost:8080/api/v1/alerts";
+        String url = "http://localhost:8080/api/v1/alerts/";
         return restTemplate.getForObject( url, List.class );
     }
 }

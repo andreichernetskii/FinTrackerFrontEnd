@@ -2,7 +2,7 @@ package com.example.finmangerfrontend.controller;
 
 import com.example.finmangerfrontend.dto.Alert;
 import com.example.finmangerfrontend.dto.FilterParameters;
-import com.example.finmangerfrontend.dto.IncomeExpense;
+import com.example.finmangerfrontend.dto.Operation;
 import com.example.finmangerfrontend.service.ApiService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
-public class IncomeExpenseController {
+public class OperationController {
     private final ApiService apiService;
 
-    public IncomeExpenseController( ApiService apiService ) {
+    public OperationController( ApiService apiService ) {
         this.apiService = apiService;
     }
 
@@ -26,7 +26,7 @@ public class IncomeExpenseController {
 
     @GetMapping( "/operations" )
     public String showOperationsByCriteria( Model model, FilterParameters filterParameters ) {
-        List<IncomeExpense> operations = apiService.getOperations( filterParameters );
+        List<Operation> operations = apiService.getOperations( filterParameters );
         Double totalAmount = apiService.getAnnualBalance( filterParameters );
         List<String> categories = apiService.getCategories();
         List<Alert> alerts = apiService.getAlerts();
@@ -46,14 +46,14 @@ public class IncomeExpenseController {
     }
 
     @PostMapping( "/add-operation" )
-    public String sendNewIncomeExpense( IncomeExpense incomeExpense ) {
-        apiService.sendNewIncomeExpense( incomeExpense );
+    public String sendNewIncomeExpense( Operation operation ) {
+        apiService.sendNewIncomeExpense( operation );
         return "redirect:/"; // here we are returning to main page without any repeated "calculations"
     }
 
     @PostMapping( "/update-operation" )
-    public String updateIncomeExpense( IncomeExpense incomeExpense ) {
-        apiService.updateIncomeExpense( incomeExpense );
+    public String updateIncomeExpense( Operation operation ) {
+        apiService.updateIncomeExpense( operation );
         return "redirect:/operations";
     }
 }

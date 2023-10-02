@@ -29,7 +29,7 @@ public class LimitsService {
         restTemplate.postForEntity( url, limit, String.class );
     }
 
-    public void deleteLimit( Long id ) {
+    public void deleteLimit( String id ) {
         restTemplate.delete( new StringBuilder("http://localhost:8080/api/v1/limits/").append( id ).toString() );
     }
 }

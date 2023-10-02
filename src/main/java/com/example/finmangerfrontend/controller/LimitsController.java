@@ -38,7 +38,7 @@ public class LimitsController {
     }
 
     @PostMapping( "/delete-limit" )
-    public String deleteLimit( Long id ) {
+    public String deleteLimit( String id ) {
         limitsService.deleteLimit( id );
         return "redirect:/limits";
     }

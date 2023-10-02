@@ -9,37 +9,6 @@
 
 <!--sterowanie limitami-->
 
-<!--  <h2>Sterowanie limitami</h2>-->
-<!--  <div class="leftside-content">-->
-<!--    <div>-->
-<!--      <p> Ustalić budget:-->
-<!--      <input placeholder="Wpisz kwotę" type="number">-->
-<!--      <button type="submit">Ustalić</button>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <p> Ustalić limit roczny:-->
-<!--        <input placeholder="Wpisz kwotę" type="number">-->
-<!--        <button type="submit">Ustalić</button>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <p> Ustalić limit miesięczny:-->
-<!--        <input placeholder="Wpisz kwotę" type="number">-->
-<!--        <button type="submit">Ustalić</button>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <p> Ustalić limit tygodniowy:-->
-<!--        <input placeholder="Wpisz kwotę" type="number">-->
-<!--        <button type="submit">Ustalić</button>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <p> Ustalić limit dzienny:-->
-<!--        <input placeholder="Wpisz kwotę" type="number">-->
-<!--        <button type="submit">Ustalić</button>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--sterowanie limitami, wersja skrócona-->
-
   <div class="leftside-content">
     <h3>Ustawienia limitów</h3>
     <form action="/add-or-update-limit" method="post">
@@ -65,20 +34,18 @@
   <table>
     <thead>
     <tr>
-      <th>Id</th>
       <th>Rozmiar limitu</th>
       <th>Typ limitu</th>
     </tr>
     </thead>
     <tbody>
       <tr th:each="limit : ${limits}">
-        <td th:text="${limit.id}"></td>
         <td th:text="${limit.limitAmount}"></td>
         <td th:text="${limit.limitType}"></td>
         <td>
           <form th:action="@{/delete-limit}" method="post">
-            <input type="hidden" name="id" th:value="${limit.id}" />
-            <button type="submit" class="btnWithImage" id="deleteBtn" th:attr="data-id=${limit.id}"
+            <input type="hidden" name="id" th:value="${limit.limitType}" />
+            <button type="submit" class="btnWithImage" id="deleteBtn" th:attr="data-id=${limit.limitType}"
                     onclick="return confirm('Czy jesteś pewien/pewna, że chcesz usunąć limit z id: ' + this.getAttribute('data-id') + '?')"
                     title="Usuń"></button>
           </form>
