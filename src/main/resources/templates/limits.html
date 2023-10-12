@@ -16,7 +16,7 @@
 
       <select id="limitType" name="limitType" required>
         <option value="" disabled selected>Okres limitu</option>
-        <option th:each="limitType : ${limitTypes}" th:value="${limitType}" th:text="${limitType}"></option>
+        <option th:each="limitType : ${limitTypes}" th:if="${limitType != 'ZERO'}" th:value="${limitType}" th:text="${limitType}"></option>
       </select>
 
       <select id="category" name="category">

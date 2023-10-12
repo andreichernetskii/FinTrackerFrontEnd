@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Limit {
+    private Long id;
     private LimitType limitType;
     private BigDecimal limitAmount;
     private String category;
@@ -12,11 +13,16 @@ public class Limit {
     public Limit() {
     }
 
-    public Limit( LimitType limitType, BigDecimal limitAmount, String category, LocalDate creationDate ) {
+    public Limit( Long id, LimitType limitType, BigDecimal limitAmount, String category, LocalDate creationDate ) {
+        this.id = id;
         this.limitType = limitType;
         this.limitAmount = limitAmount;
         this.category = category;
         this.creationDate = creationDate;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public BigDecimal getLimitAmount() {
@@ -33,6 +39,10 @@ public class Limit {
 
     public LocalDate getCreationDate() {
         return creationDate;
+    }
+
+    public void setId( Long id ) {
+        this.id = id;
     }
 
     public void setLimitAmount( BigDecimal limitAmount ) {
