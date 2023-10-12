@@ -36,12 +36,16 @@
     <tr>
       <th>Rozmiar limitu</th>
       <th>Typ limitu</th>
+      <th>Kategorja</th>
+      <th>Data utworzenia</th>
     </tr>
     </thead>
     <tbody>
       <tr th:each="limit : ${limits}">
         <td th:text="${limit.limitAmount}"></td>
         <td th:text="${limit.limitType}"></td>
+        <td th:text="${limit.category}"></td>
+        <td th:text="${limit.creationDate}"></td>
         <td>
           <form th:action="@{/delete-limit}" method="post">
             <input type="hidden" name="id" th:value="${limit.limitType}" />
