@@ -38,9 +38,10 @@ public class LimitsController {
     }
 
     @PostMapping( "/delete-limit" )
-    public String deleteLimit( String id ) {
+    public String deleteLimit( Long id ) {
         limitsService.deleteLimit( id );
         return "redirect:/limits";
     }
 
+    //todo dodać handler (podobnie, jak w backend? tylko wrzucać na html)
 }

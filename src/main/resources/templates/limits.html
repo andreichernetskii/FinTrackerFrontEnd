@@ -48,8 +48,8 @@
         <td th:text="${limit.creationDate}"></td>
         <td>
           <form th:action="@{/delete-limit}" method="post">
-            <input type="hidden" name="id" th:value="${limit.limitType}" />
-            <button type="submit" class="btnWithImage" id="deleteBtn" th:attr="data-id=${limit.limitType}"
+            <input type="hidden" name="id" th:value="${limit.id}" />
+            <button type="submit" class="btnWithImage" id="deleteBtn" th:attr="data-id=${limit.id}"
                     onclick="return confirm('Czy jesteś pewien/pewna, że chcesz usunąć limit z id: ' + this.getAttribute('data-id') + '?')"
                     title="Usuń"></button>
           </form>
@@ -59,6 +59,6 @@
   </table>
 
 </div>
-
+<!--           todo: przerobić zapytanie usunięcia     -->
 </body>
 </html>
