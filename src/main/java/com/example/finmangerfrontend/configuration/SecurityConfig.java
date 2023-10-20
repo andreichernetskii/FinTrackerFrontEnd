@@ -25,6 +25,8 @@ public class SecurityConfig {
                 .csrf( customizer -> customizer.disable() )
                 .headers( customizer -> customizer.disable() )
                 .authorizeHttpRequests( customizer ->
+                        customizer.requestMatchers( "/" ).permitAll() )
+                .authorizeHttpRequests( customizer ->
                         customizer.anyRequest().authenticated() )
                 .formLogin( Customizer.withDefaults() )
 //                .httpBasic( Customizer.withDefaults() )
