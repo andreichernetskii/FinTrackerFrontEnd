@@ -1,12 +1,12 @@
 package com.example.finmangerfrontend.dto;
 
-public class User {
+public class ApplicationUser {
     private String email;
     private String password;
 
-    public User() {}
+    public ApplicationUser() {}
 
-    public User( String email, String password ) {
+    public ApplicationUser( String email, String password ) {
         this.email = email;
         this.password = password;
     }

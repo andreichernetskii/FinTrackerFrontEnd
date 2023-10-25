@@ -8,12 +8,16 @@
     <p>
         Wpisz swój email, wymyślij hasło i naciśnij "Utworzyć" aby zarejestrować nowego użytkownika.
     </p>
-    <form th:action="@{/registration_new_user}" method="post">
+    <form th:action="@{/registration}" method="post">
         <div>
             <label>Login</label>
-            <input type="text" id="email_input" name="email" placeholder="Wpisz email" required>
+            <input type="text" id="email_input" name="email" placeholder="Wpisz email" required><br><br>
+
             <label>Password</label>
-            <input type="text" id="password_input" name="password" placeholder="Wpisz hasło" required>
+            <input type="password" id="password_input" name="password" placeholder="Wpisz hasło" required><br><br>
+
+            <label>Potwierdź hasło:</label>
+            <input type="password" id="potwierdz_haslo" name="potwierdz_haslo" required><br><br>
         </div>
         <div>
             <button type="submit" title="Ok">Utworzyć</button>

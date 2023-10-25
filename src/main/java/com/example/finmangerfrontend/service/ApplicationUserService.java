@@ -1,5 +1,6 @@
 package com.example.finmangerfrontend.service;
 
+import com.example.finmangerfrontend.dto.ApplicationUser;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Service
-public class UserService implements AuthenticationProvider {
+public class ApplicationUserService implements AuthenticationProvider {
     private final RestTemplate restTemplate;
     private final InMemoryUserDetailsManager manager;
     private PasswordEncoder passwordEncoder;
@@ -29,7 +30,7 @@ public class UserService implements AuthenticationProvider {
     // do nagłówków
     // albo będze konfigórował RestTeplate to robił
 
-    public UserService( RestTemplate restTemplate, PasswordEncoder passwordEncoder ) {
+    public ApplicationUserService( RestTemplate restTemplate, PasswordEncoder passwordEncoder ) {
         this.restTemplate = restTemplate;
         this.manager = configureUserManager( passwordEncoder );
     }
@@ -86,7 +87,7 @@ public class UserService implements AuthenticationProvider {
 
             @Override
             public String getName() {
-                return "user";
+                return user.getUsername();
             }
         };
     }
@@ -96,6 +97,10 @@ public class UserService implements AuthenticationProvider {
     @Override
     public boolean supports( Class<?> authentication ) {
         return true;
+    }
+
+    public void addNewUser( ApplicationUser applicationUser ) {
+
     }
 }
 

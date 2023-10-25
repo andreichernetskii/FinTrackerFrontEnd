@@ -3,6 +3,9 @@ package com.example.finmangerfrontend.service;
 import com.example.finmangerfrontend.dto.Alert;
 import com.example.finmangerfrontend.dto.FilterParameters;
 import com.example.finmangerfrontend.dto.Operation;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,8 +34,14 @@ public class ApiService {
     public List<Operation> getOperations( FilterParameters filterParameters ) {
         String filter = filterParameters.getParamsAsURL();
         String url = "http://localhost:8080/api/v1/incomes-expenses/operations/statistics?" + filter;
-        List<Operation> response = restTemplate.getForObject( url, List.class );
-        return response;
+//        List<Operation> response = restTemplate.getForObject( url, List.class );
+        ResponseEntity<List<Operation>> responseEntity = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<Operation>>() {}
+        );
+        return responseEntity.getBody();
     }
 
     public Double getAnnualBalance( FilterParameters filterParameters ) {
