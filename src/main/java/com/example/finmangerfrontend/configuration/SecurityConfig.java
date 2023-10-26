@@ -32,7 +32,7 @@ public class SecurityConfig {
                     customizer.requestMatchers( "/" ).permitAll();
                     customizer.anyRequest().authenticated();
                 } )
-                .formLogin( Customizer.withDefaults() )
+                .formLogin( form -> form.loginPage( "/login" ).permitAll() )
                 .authenticationProvider( applicationUserService )
         ;
 
