@@ -1,19 +1,9 @@
 package com.example.finmangerfrontend.service;
 
 import com.example.finmangerfrontend.dto.Limit;
-import com.example.finmangerfrontend.dto.Operation;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
-
-import java.util.Collections;
 import java.util.List;
 
 @Service
