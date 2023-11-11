@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@Controller
+//@Controller
 public class RegistrationController {
     private final ApplicationUserService applicationUserService;
 
@@ -19,9 +19,9 @@ public class RegistrationController {
         return "/registration";
     }
 
-    @PostMapping("/registration")
-    public String createNewUser( ApplicationUser applicationUser ) {
-        applicationUserService.addNewUser( applicationUser );
-        return "index.html";
-    }
+//    @PostMapping("/registration")
+//    public String createNewUser( ApplicationUser applicationUser ) {
+//        applicationUserService.addNewUser( applicationUser );
+//        return "index.html";
+//    }
 }

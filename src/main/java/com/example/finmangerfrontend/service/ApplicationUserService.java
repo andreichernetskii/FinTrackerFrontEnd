@@ -7,6 +7,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Service;
@@ -15,14 +17,22 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Service
-public class ApplicationUserService implements AuthenticationProvider {
-    private final RestTemplate restTemplate;
-    private final InMemoryUserDetailsManager manager;
-    private PasswordEncoder passwordEncoder;
-    private UserDetails user;
+//@Service
+public class ApplicationUserService implements UserDetailsService {
+//    private final RestTemplate restTemplate;
+//    private PasswordEncoder passwordEncoder;
+//
+//    public ApplicationUserService( RestTemplate restTemplate, PasswordEncoder passwordEncoder ) {
+//        this.restTemplate = restTemplate;
+//        this.passwordEncoder = passwordEncoder;
+//    }
 
-    // todo: userService robi zapytanie do endpoint LOGIN wstawiając hasło i login
+    @Override
+    public UserDetails loadUserByUsername( String username ) throws UsernameNotFoundException {
+        return null;
+    }
+
+// todo: userService robi zapytanie do endpoint LOGIN wstawiając hasło i login
     // jeśli bląd to AuthentificationFalse,
     // jeśli ok, to dodaje użytkownika do InMemoryUserDetailsManager,
     // żeby zapamiętać login i hasło w sessii
@@ -30,78 +40,9 @@ public class ApplicationUserService implements AuthenticationProvider {
     // do nagłówków
     // albo będze konfigórował RestTeplate to robił
 
-    public ApplicationUserService( RestTemplate restTemplate, PasswordEncoder passwordEncoder ) {
-        this.restTemplate = restTemplate;
-        this.manager = configureUserManager( passwordEncoder );
-    }
 
-    public InMemoryUserDetailsManager configureUserManager( PasswordEncoder passEncoder) {
-        user = new User( "user1", passEncoder.encode( "123" ), new ArrayList<>() );
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager( user );
-        return manager;
-    }
 
-   /* @Override
-    public UserDetails loadUserByUsername( String username ) throws UsernameNotFoundException {
-        User user = restTemplate.getForObject(  )
-        User user = userRepository.findById( username )
-                .orElseThrow(() -> new UsernameNotFoundException( "User nie istnieje!" ));
-        UserDetails user1 = new org.springframework.security.core.userdetails.User(
-                user.getEmail(), user.getPassword(), new ArrayList<>() );
 
-        return user1;
-    }*/
-
-    @Override
-    public Authentication authenticate( Authentication authentication ) throws AuthenticationException {
-        return new Authentication() {
-            @Override
-            public Collection<? extends GrantedAuthority> getAuthorities() {
-                return new ArrayList<>();
-            }
-
-            @Override
-            public Object getCredentials() {
-                return "abc";
-            }
-
-            @Override
-            public Object getDetails() {
-                return new Object();
-            }
-
-            @Override
-            public Object getPrincipal() {
-                return user;
-            }
-
-            @Override
-            public boolean isAuthenticated() {
-                return true;
-            }
-
-            @Override
-            public void setAuthenticated( boolean isAuthenticated ) throws IllegalArgumentException {
-
-            }
-
-            @Override
-            public String getName() {
-                return user.getUsername();
-            }
-        };
-    }
-
-//    This function is used to check if the particular authentication type is supported by our AuthenticationProvider
-//    implementation class. If it is supported it returns true or else false.
-    @Override
-    public boolean supports( Class<?> authentication ) {
-        return true;
-    }
-
-    public void addNewUser( ApplicationUser applicationUser ) {
-
-    }
 }
 
 /*

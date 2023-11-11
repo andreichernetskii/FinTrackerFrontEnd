@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container">
-        <form class="form-signin" method="post" action="/login">
+        <form action="/login-request" method="post" >
             <h2 class="form-signin-heading">Please, login to the app</h2>
             <p>
                 <label for="username" class="sr-only">Username</label>
@@ -20,6 +20,10 @@
             <p>
                 <label for="password" class="sr-only">Password</label>
                 <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
+            </p>
+            <p>
+                <label for="remember-me">Remember me</label>
+                <input type="checkbox" id="remember-me" name="remember-me" class="form-control">
             </p>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form>
