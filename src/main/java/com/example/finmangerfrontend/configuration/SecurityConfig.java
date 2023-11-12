@@ -15,11 +15,11 @@ public class SecurityConfig {
                 .csrf( customizer -> customizer.disable() )
                 .authorizeHttpRequests( customizer -> {
                     customizer.requestMatchers( "/login" ).permitAll();
-                    customizer.anyRequest().authenticated();
+                    customizer.anyRequest().permitAll();
                 } )
                 .formLogin( form -> {
                     form.loginPage( "/login" ).permitAll();
-                    form.successForwardUrl( "/limits" );
+//                    form.successForwardUrl( "/limits" );
                 } );
 
 
