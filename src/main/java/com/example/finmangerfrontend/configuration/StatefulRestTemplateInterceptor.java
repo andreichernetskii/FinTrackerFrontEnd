@@ -11,6 +11,8 @@ import java.io.IOException;
 
 public class StatefulRestTemplateInterceptor implements ClientHttpRequestInterceptor {
     private String cookie;
+
+    // catching cookies from response for next using
     @Override
     public ClientHttpResponse intercept( HttpRequest request, byte[] body, ClientHttpRequestExecution execution ) throws IOException {
         if ( cookie != null ) request.getHeaders().add( HttpHeaders.COOKIE, cookie );

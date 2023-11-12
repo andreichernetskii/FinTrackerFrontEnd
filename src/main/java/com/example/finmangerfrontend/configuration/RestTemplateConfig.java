@@ -9,11 +9,10 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class RestTemplateConfig {
-
     @Bean
     public RestTemplate createRestTemplate( RestTemplateBuilder templateBuilder ) {
         RestTemplate restTemplate = templateBuilder.build();
-        restTemplate.getInterceptors().add( new StatefulRestTemplateInterceptor() );
+        restTemplate.getInterceptors().add( new StatefulRestTemplateInterceptor() );  // allows cookies catching and keeping
 
         return restTemplate;
     }
