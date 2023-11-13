@@ -34,7 +34,7 @@ public class ApiService {
     public List<Operation> getOperations( FilterParameters filterParameters ) {
         String filter = filterParameters.getParamsAsURL();
         String url = "http://localhost:8080/api/v1/incomes-expenses/operations/statistics?" + filter;
-//        List<Operation> response = restTemplate.getForObject( url, List.class );
+
         ResponseEntity<List<Operation>> responseEntity = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
