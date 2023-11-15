@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-//@RequestMapping("/login")
 public class LoginController {
 
     private final LoginService loginService;
@@ -14,17 +13,16 @@ public class LoginController {
         this.loginService = loginService;
     }
 
-//    @GetMapping()
-//    public String getLoginView() {
-//        return "login.html";
-//    }
+    @GetMapping( "/login" )
+    public String getLoginView() {
+        return "login.html";
+    }
 
-    @PostMapping( "/login" )
-    public void login( @RequestParam( "username" ) String username,
+    @PostMapping( "/login-processing" )
+    public String login( @RequestParam( "username" ) String username,
                        @RequestParam( "password" ) String password ) {
 
         loginService.login( username, password );
-
-//        return "redirect:/";
+        return "redirect:/";
     }
 }
