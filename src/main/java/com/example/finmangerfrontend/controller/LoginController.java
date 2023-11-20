@@ -15,7 +15,7 @@ public class LoginController {
 
     @GetMapping( "/login" )
     public String getLoginView() {
-        return "login.html";
+        return "login";
     }
 
     @PostMapping( "/login-processing" )
@@ -24,5 +24,11 @@ public class LoginController {
 
         loginService.login( username, password );
         return "redirect:/";
+    }
+
+    @PostMapping( "/logout-user" )
+    public String logoutUser() {
+        loginService.logoutUser();
+        return "redirect:/login";
     }
 }

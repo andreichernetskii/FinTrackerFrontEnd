@@ -25,4 +25,11 @@ public class LoginService {
 
         return response.getBody();
     }
+
+    public String logoutUser() {
+        String logoutUrl = "http://localhost:8080/api/auth/signout";
+        ResponseEntity<String> response = restTemplate.postForEntity( logoutUrl, null, String.class );
+
+        return response.getBody();
+    }
 }

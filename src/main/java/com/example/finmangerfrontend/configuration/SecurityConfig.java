@@ -29,13 +29,13 @@ public class SecurityConfig {
                 .authorizeHttpRequests( customizer -> {
                     customizer.requestMatchers( "/login" ).permitAll();
                     customizer.requestMatchers( "/login-processing" ).permitAll();
-                    customizer.anyRequest().authenticated();
+                    customizer.anyRequest().permitAll();
                 } )
                 .formLogin( form -> {
                     form.loginPage( "/login" ).permitAll();
-//                    form.successHandler( successHandler );
+                    form.successHandler( successHandler );
 //                    form.successForwardUrl( "/limits" );
-                    form.defaultSuccessUrl( "/" );
+//                    form.defaultSuccessUrl( "/" );
                 } );
 
         return httpSecurity.build();
@@ -43,7 +43,7 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationSuccessHandler successHandler() {
-        return new SimpleUrlAuthenticationSuccessHandler( "/limits" );
+        return new SimpleUrlAuthenticationSuccessHandler( "/" );
     }
 
     @Bean
