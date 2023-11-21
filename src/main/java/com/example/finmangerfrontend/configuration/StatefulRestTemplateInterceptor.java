@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 
 public class StatefulRestTemplateInterceptor implements ClientHttpRequestInterceptor {
     private String cookie;
@@ -23,8 +24,16 @@ public class StatefulRestTemplateInterceptor implements ClientHttpRequestInterce
         if ( cookie != null ) request.getHeaders().add( HttpHeaders.COOKIE, cookie );
 
         ClientHttpResponse response = execution.execute( request, body );
+        List<String> cookies = response.getHeaders().get( HttpHeaders.SET_COOKIE );
 
-        if ( cookie == null ) cookie = response.getHeaders().getFirst( HttpHeaders.SET_COOKIE );
+        if ( cookies != null ) {
+            // refresh cookies after every getting them from backend
+            for ( String newCookie : cookies ) {
+                if ( cookie == null || !cookie.contains( newCookie ) ) {
+                    cookie = newCookie;
+                }
+            }
+        }
 
         return response;
     }
