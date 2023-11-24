@@ -20,20 +20,20 @@ public class ApiService {
     }
 
     public void sendNewIncomeExpense( Operation operation ) {
-        restTemplate.postForEntity( "http://localhost:8080/api/v1/incomes-expenses", operation, String.class );
+        restTemplate.postForEntity( "http://localhost:8080/api/v1/operations/", operation, String.class );
     }
 
     public void deleteOperation( Long id ) {
-        restTemplate.delete( "http://localhost:8080/api/v1/incomes-expenses/operations/" + id );
+        restTemplate.delete( "http://localhost:8080/api/v1/operations/" + id );
     }
 
     public void updateIncomeExpense( Operation operation ) {
-        restTemplate.put( "http://localhost:8080/api/v1/incomes-expenses/operations/update-operation", operation );
+        restTemplate.put( "http://localhost:8080/api/v1/operations/", operation );
     }
 
     public List<Operation> getOperations( FilterParameters filterParameters ) {
         String filter = filterParameters.getParamsAsURL();
-        String url = "http://localhost:8080/api/v1/incomes-expenses/operations/statistics?" + filter;
+        String url = "http://localhost:8080/api/v1/operations/?" + filter;
 
         ResponseEntity<List<Operation>> responseEntity = restTemplate.exchange(
                 url,
@@ -45,13 +45,13 @@ public class ApiService {
     }
 
     public Double getAnnualBalance( FilterParameters filterParameters ) {
-        String url = "http://localhost:8080/api/v1/incomes-expenses/operations/annual?" + filterParameters.getParamsAsURL();
+        String url = "http://localhost:8080/api/v1/operations/annual?" + filterParameters.getParamsAsURL();
         Double response = restTemplate.getForObject( url, Double.class );
         return response;
     }
 
     public List<String> getCategories() {
-        String url = "http://localhost:8080/api/v1/incomes-expenses/categories?";
+        String url = "http://localhost:8080/api/v1/operations/categories?";
         List<String> categories = restTemplate.getForObject( url, List.class );
         return categories;
     }
