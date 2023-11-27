@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class LoginController {
-
     private final LoginService loginService;
 
     public LoginController( LoginService loginService ) {
@@ -31,4 +30,18 @@ public class LoginController {
         loginService.logoutUser();
         return "redirect:/login";
     }
+
+    @GetMapping( "/registration" )
+    public String getRegistrationView() {
+        return "registration";
+    }
+
+    @PostMapping( "/registration" )
+    public String registerNewUser( @RequestParam( "username" ) String username,
+                                   @RequestParam( "password" ) String password ) {
+
+        loginService.registerNewUser( username, password );
+        return "redirect:/login";
+    }
+
 }

@@ -7,7 +7,7 @@ public class Operation {
     private OperationType operationType;
     private BigDecimal amount;
     private String category;
-    private String date; // todo: konwersia do odpowiedniego formatu: Date albo LocalDate
+    private String date;
 
     public Operation() {
     }

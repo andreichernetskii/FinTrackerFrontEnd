@@ -29,6 +29,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests( customizer -> {
                     customizer.requestMatchers( "/login" ).permitAll();
                     customizer.requestMatchers( "/login-processing" ).permitAll();
+                    customizer.requestMatchers( "/registration" ).permitAll();
                     customizer.anyRequest().permitAll();
                 } )
                 .formLogin( form -> {
