@@ -10,23 +10,16 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class LoginService {
     private final RestTemplate restTemplate;
-    private final AuthenticationManager authenticationManager;
-    private final PasswordEncoder passwordEncoder;
 
-    public LoginService( RestTemplate restTemplate, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder ) {
+    public LoginService( RestTemplate restTemplate ) {
         this.restTemplate = restTemplate;
-        this.authenticationManager = authenticationManager;
-        this.passwordEncoder = passwordEncoder;
     }
 
     public String login( String username, String password ) {
         String loginUrl = "http://localhost:8080/api/auth/signin";
-        String encodedPassword = passwordEncoder.encode( password );
+        ApplicationUser applicationUser = new ApplicationUser( username, password );
 
-        ApplicationUser applicationUser = new ApplicationUser( username, encodedPassword );
-
-        ResponseEntity<String> response =
-                restTemplate.postForEntity( loginUrl, applicationUser, String.class );
+        ResponseEntity<String> response = restTemplate.postForEntity( loginUrl, applicationUser, String.class );
 
         return response.getBody();
     }
@@ -40,9 +33,7 @@ public class LoginService {
 
     public String registerNewUser( String username, String password ) {
         String registrationUrl = "http://localhost:8080/api/auth/signup";
-        String encodedPassword = passwordEncoder.encode( password );
-
-        ApplicationUser applicationUser = new ApplicationUser( username, encodedPassword );
+        ApplicationUser applicationUser = new ApplicationUser( username, password );
 
         ResponseEntity<String> response = restTemplate.postForEntity( registrationUrl, applicationUser, String.class );
 
