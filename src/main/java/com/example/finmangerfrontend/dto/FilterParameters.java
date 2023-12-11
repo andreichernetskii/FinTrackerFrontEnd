@@ -40,7 +40,7 @@ public class FilterParameters {
     }
 
     public String getParamsAsURL() {
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder("?");
         if ( year != null && !year.isEmpty() ) stringBuilder.append( "year=" ).append( year ).append( "&" );
         if ( month != null && !month.isEmpty() ) stringBuilder.append( "month=" ).append( month ).append( "&" );
         if ( operationType != null && !operationType.isEmpty() ) stringBuilder.append( "operationType=" ).append( operationType ).append( "&" );
