@@ -33,7 +33,7 @@ public class ApiService {
 
     public List<Operation> getOperations( FilterParameters filterParameters ) {
         String filter = filterParameters.getParamsAsURL();
-        String url = "http://localhost:8080/api/v1/accounts/operations" + filter;
+        String url = "http://localhost:8080/api/v1/operations/" + filter;
 
         ResponseEntity<List<Operation>> responseEntity = restTemplate.exchange(
                 url,
