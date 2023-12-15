@@ -4,6 +4,7 @@ import com.example.finmangerfrontend.dto.Limit;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -24,7 +25,9 @@ public class LimitsService {
         return restTemplate.getForObject( url, List.class );
     }
 
+    // todo: rozbić to na osobne metody i zrobić jak w IncomeExpense
     public void addOrUpdateLimit( Limit limit ) {
+        limit.setCreationDate( LocalDate.now() );
         String url = "http://localhost:8080/api/v1/limits/";
         restTemplate.postForEntity( url, limit, String.class );
     }
