@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 
@@ -31,9 +32,15 @@ public class LimitsController {
         return "limits.html";
     }
 
-    @PostMapping( "/add-or-update-limit" )
-    public String addOrUpdateLimit( Limit limit ) {
-        limitsService.addOrUpdateLimit( limit );
+    @PostMapping( "/add-new-limit" )
+    public String addNewLimit( Limit limit ) {
+        limitsService.addNewLimit( limit );
+        return "redirect:/limits";
+    }
+
+    @PutMapping( "/update-limit" )
+    public String updateLimit( Limit limit ) {
+        limitsService.updateLimit( limit );
         return "redirect:/limits";
     }
 

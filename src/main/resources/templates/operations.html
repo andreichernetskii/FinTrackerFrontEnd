@@ -24,7 +24,13 @@
             <td th:text="${operation.amount}"></td>
             <td th:text="${operation.category}"></td>
             <td>
-                <button class="editBtn btnWithImage" id="editBtn" title="Edytuj" th:attr="data-id=${operation.id}, data-operationType=${operation.operationType}, data-amount=${operation.amount}, data-date=${operation.date}, data-category=${operation.category}"></button>
+                <button class="editBtn btnWithImage" id="editBtn" title="Edytuj"
+                        th:attr="data-id=${operation.id},
+                        data-operationType=${operation.operationType},
+                        data-amount=${operation.amount},
+                        data-date=${operation.date},
+                        data-category=${operation.category}">
+                </button>
             </td>
             <td>
                 <form th:action="@{/delete}" method="post">

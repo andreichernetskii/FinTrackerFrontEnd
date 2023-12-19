@@ -11,7 +11,7 @@
 
   <div class="leftside-content">
     <h3>Ustawienia limitów</h3>
-    <form action="/add-or-update-limit" method="post">
+    <form action="/add-new-limit" method="post">
       <input placeholder="Wpisz kwotę" type="number" step="any" name="limitAmount" required>
 
       <select id="limitType" name="limitType" required>
@@ -46,6 +46,14 @@
         <td th:text="${limit.limitType}"></td>
         <td th:text="${limit.category}"></td>
         <td th:text="${limit.creationDate}"></td>
+        <td>
+          <button class="editBtn btnWithImage" id="editBtn" title="Edytuj"
+                  th:attr="data-id=${limit.id},
+                  data-limitType=${limit.limitType},
+                  data-limitAmount=${limit.limitAmount},
+                  data-category=${limit.category}">
+          </button>
+        </td>
         <td>
           <form th:action="@{/delete-limit}" method="post">
             <input type="hidden" name="id" th:value="${limit.id}" />
