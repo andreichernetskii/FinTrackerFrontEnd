@@ -35,13 +35,6 @@ public class LimitsService {
         restTemplate.put( url, limit );
     }
 
-    // todo: rozbić to na osobne metody i zrobić jak w IncomeExpense
-//    public void addOrUpdateLimit( Limit limit ) {
-//        limit.setCreationDate( LocalDate.now() );
-//        String url = "http://localhost:8080/api/v1/limits/";
-//        restTemplate.postForEntity( url, limit, String.class );
-//    }
-
     public void deleteLimit( Long id ) {
         restTemplate.delete( "http://localhost:8080/api/v1/limits/" + id );
     }

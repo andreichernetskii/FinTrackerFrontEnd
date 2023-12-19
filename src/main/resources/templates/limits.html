@@ -14,12 +14,12 @@
     <form action="/add-new-limit" method="post">
       <input placeholder="Wpisz kwotę" type="number" step="any" name="limitAmount" required>
 
-      <select id="limitType" name="limitType" required>
+      <select name="limitType" required>
         <option value="" disabled selected>Okres limitu</option>
         <option th:each="limitType : ${limitTypes}" th:if="${limitType != 'ZERO'}" th:value="${limitType}" th:text="${limitType}"></option>
       </select>
 
-      <select id="category" name="category">
+      <select name="category">
         <option value="" selected>Wszystkie kategorii</option>
         <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
       </select>
@@ -67,7 +67,37 @@
   </table>
 
 </div>
+
+<!--Edition field-->
+
+<div>
+  <h2>Eycja operacji:</h2>
+  <form action="update-limit" method="post">
+    <label>Limit Id</label>
+    <input type="number" name="Id" id="id" readonly>
+
+    <label>Limit type:</label>
+    <select id="limitType" name="limitType">
+      <option value="" disabled selected>Limit type</option>
+      <option th:each="limitType : ${limitTypes}" th:if="${limitType != 'ZERO'}" th:value="${limitType}" th:text="${limitType}"></option>
+    </select>
+
+    <label>Amount</label>
+    <input type="number" step="any" name="amount" id="amount" required>
+
+    <label>Category</label>
+    <select name="category">
+      <option value="" selected>Wszystkie kategorii</option>
+      <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
+    </select>
+
+    <button id="submitBtn" type="submit">Edytuj</button>
+    <button id="cancelDialogBtn" type="button">Cofnij</button>
+  </form>
+</div>
 <!--           todo: przerobić zapytanie usunięcia     -->
 <!--  <script src="/static/error_dialog.js"></script>-->
+<div class="clear"></div>
+<script src="/static/script.js"></script>
 </body>
 </html>
