@@ -51,6 +51,7 @@
                   th:attr="data-id=${limit.id},
                   data-limitType=${limit.limitType},
                   data-limitAmount=${limit.limitAmount},
+                  data-date=${limit.creationDate},
                   data-category=${limit.category}">
           </button>
         </td>
@@ -70,8 +71,8 @@
 
 <!--Edition field-->
 
-<div>
-  <h2>Eycja operacji:</h2>
+<div id="dialog" class="hidden">
+  <h2>Eycja limitu:</h2>
   <form action="update-limit" method="post">
     <label>Limit Id</label>
     <input type="number" name="Id" id="id" readonly>
@@ -98,6 +99,6 @@
 <!--           todo: przerobić zapytanie usunięcia     -->
 <!--  <script src="/static/error_dialog.js"></script>-->
 <div class="clear"></div>
-<script src="/static/script.js"></script>
+<script src="/edit-script.js"></script>
 </body>
 </html>

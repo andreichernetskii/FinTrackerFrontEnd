@@ -17,19 +17,24 @@ document.querySelectorAll('.editBtn').forEach((btn) => {
         const category = btn.getAttribute('data-category');
 
         // filling forms with data from row
-        operationIdInput.value = operationId;
-        operationTypeInput.value = operationType;
-        amountInput.value = amount;
-        dateInput.value = date;
-        categoryInput.value = category;
-        dialog.classList.remove('hidden');
-        centerDialog();
+        if (operationIdInput) operationIdInput.value = operationId;
+        if (operationTypeInput) operationTypeInput.value = operationType;
+        if (amountInput) amountInput.value = amount;
+        if (dateInput) dateInput.value = date;
+        if (categoryInput) categoryInput.value = category;
+
+        if (dialog) {
+            dialog.classList.remove('hidden');
+            centerDialog();
+        }
     });
 });
 
 // by pressing the cancel button dialog window will be closed
 document.getElementById('cancelDialogBtn').addEventListener('click', (event) => {
-    dialog.classList.add('hidden');
+    if (dialog) {
+        dialog.classList.add('hidden');
+    }
 });
 
 function centerDialog() {
