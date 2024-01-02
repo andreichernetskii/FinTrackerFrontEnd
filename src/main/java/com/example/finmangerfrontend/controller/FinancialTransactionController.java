@@ -32,7 +32,7 @@ public class FinancialTransactionController {
         List<Alert> alerts = apiService.getAlerts();
 
         model.addAttribute( "filter", filterParameters );
-        model.addAttribute( "operations", financialTransactions );
+        model.addAttribute( "financialTransactions", financialTransactions );
         model.addAttribute( "totalAmount", totalAmount );
         model.addAttribute( "categories", categories );
         model.addAttribute( "alerts", alerts );

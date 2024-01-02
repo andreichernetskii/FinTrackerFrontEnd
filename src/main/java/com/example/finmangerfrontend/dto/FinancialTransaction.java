@@ -53,8 +53,7 @@ public class FinancialTransaction {
     }
 
     public void setAmount( BigDecimal amount ) {
-        BigDecimal tempAmount = amount.abs();
-        this.amount = ( this.financialTransactionType == FinancialTransactionType.EXPENSE ) ? tempAmount.negate() : tempAmount;
+        this.amount = amount;
     }
 
     public void setCategory( String category ) {
@@ -68,7 +67,8 @@ public class FinancialTransaction {
     @Override
     public String toString() {
         return "FinancialTransactionManager {" +
-                "financialTransactionType=" + financialTransactionType +
+                "id=" + id +
+                ", financialTransactionType=" + financialTransactionType +
                 ", amount=" + amount +
                 ", category='" + category + '\'' +
                 ", date='" + date + '\'' +
