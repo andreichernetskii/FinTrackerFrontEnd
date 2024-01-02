@@ -4,7 +4,7 @@ package com.example.finmangerfrontend.dto;
 public class FilterParameters {
     private String year;
     private String month;
-    private String operationType;
+    private String financialTransactionType;
     private String category;
 
     public void setYear( String year ) {
@@ -15,8 +15,8 @@ public class FilterParameters {
         this.month = month;
     }
 
-    public void setOperationType( String operationType ) {
-        this.operationType = operationType;
+    public void setFinancialTransactionType( String financialTransactionType ) {
+        this.financialTransactionType = financialTransactionType;
     }
 
     public void setCategory( String category ) {
@@ -31,8 +31,8 @@ public class FilterParameters {
         return month;
     }
 
-    public String getOperationType() {
-        return operationType;
+    public String getFinancialTransactionType() {
+        return financialTransactionType;
     }
 
     public String getCategory() {
@@ -43,7 +43,7 @@ public class FilterParameters {
         StringBuilder stringBuilder = new StringBuilder("?");
         if ( year != null && !year.isEmpty() ) stringBuilder.append( "year=" ).append( year ).append( "&" );
         if ( month != null && !month.isEmpty() ) stringBuilder.append( "month=" ).append( month ).append( "&" );
-        if ( operationType != null && !operationType.isEmpty() ) stringBuilder.append( "operationType=" ).append( operationType ).append( "&" );
+        if ( financialTransactionType != null && !financialTransactionType.isEmpty() ) stringBuilder.append( "financialTransactionType=" ).append( financialTransactionType ).append( "&" );
         if ( category != null && !category.isEmpty() ) stringBuilder.append( "category=" ).append( category ).append( "&" );
         return stringBuilder.toString();
     }

@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>List of operations</title>
+    <title>List of Financial Transactions</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
@@ -18,58 +18,58 @@
         </thead>
         <tbody>
 <!--    for Thymleaf:-->
-        <tr th:each="operation : ${operations}">
-            <td th:text="${operation.id}"></td>
-            <td th:text="${operation.date}"></td>
-            <td th:text="${operation.amount}"></td>
-            <td th:text="${operation.category}"></td>
+        <tr th:each="financialTransaction : ${financialTransactions}">
+            <td th:text="${financialTransaction.id}"></td>
+            <td th:text="${financialTransaction.date}"></td>
+            <td th:text="${financialTransaction.amount}"></td>
+            <td th:text="${financialTransaction.category}"></td>
             <td>
-                <button class="editBtn btnWithImage" id="editBtn" title="Edytuj"
-                        th:attr="data-id=${operation.id},
-                        data-operationType=${operation.operationType},
-                        data-amount=${operation.amount},
-                        data-date=${operation.date},
-                        data-category=${operation.category}">
+                <button class="editBtn btnWithImage" id="editBtn" title="Edit"
+                        th:attr="data-id=${financialTransaction.id},
+                        data-type=${financialTransaction.financialTransactionType},
+                        data-amount=${financialTransaction.amount},
+                        data-date=${financialTransaction.date},
+                        data-category=${financialTransaction.category}">
                 </button>
             </td>
             <td>
                 <form th:action="@{/delete}" method="post">
-                    <input type="hidden" name="id" th:value="${operation.id}" />
-                    <button type="submit" class="btnWithImage" id="deleteBtn" th:attr="data-id=${operation.id}"
+                    <input type="hidden" name="id" th:value="${financialTransaction.id}" />
+                    <button type="submit" class="btnWithImage" id="deleteBtn" th:attr="data-id=${financialTransaction.id}"
                             onclick="return confirm('Czy jesteś pewien/pewna, że chcesz usunąć operację z id: ' + this.getAttribute('data-id') + '?')"
-                            title="Usuń"></button>
+                            title="Delete"></button>
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
 
-<!--    Pole edycji danych-->
+<!--Edition field-->
 
     <div id="dialog" class="hidden">
-        <h2>Eycja operacji:</h2>
-        <form action="update-operation" method="post">
-            <label>Id operacii</label>
+        <h2>Edit transaction:</h2>
+        <form action="update-transaction" method="post">
+            <label>Transaction ID</label>
             <input type="number" name="Id" id="id" readonly>
 
-            <label>Typ operacii:</label>
-            <select id="operationType" name="operationType">
-                <option value="" disabled selected>Typ operacji</option>
+            <label>Transaction type:</label>
+            <select id="type" name="financialTransactionType">
+                <option value="" disabled selected>Transaction type</option>
                 <option value="INCOME">Income</option>
                 <option value="EXPENSE">Expense</option>
             </select>
 
-            <label>Kwota</label>
+            <label>Amount</label>
             <input type="number" step="any" name="amount" id="amount" required>
 
-            <label>Data</label>
-            <input type="date" name="date" id="date" required>
+            <label>Date</label>
+            <input type="date" name="date" id="date" required readonly>
 
-            <label>Kategoria</label>
+            <label>Category</label>
             <input type="text" name="category" id="category" required>
 
-            <button id="submitBtn" type="submit">Edytuj</button>
-            <button id="cancelDialogBtn" type="button">Cofnij</button>
+            <button id="submitBtn" type="submit">Edit</button>
+            <button id="cancelDialogBtn" type="button">Cancel</button>
         </form>
     </div>
 
@@ -81,7 +81,7 @@
 
         <h2>Statystyka</h2>
         <br>
-        <form action="/operations" method="get" th:object="${filter}">
+        <form action="/financial-transactions" method="get" th:object="${filter}">
             <label>Rok</label>
             <input type="number"  id="year" th:field="*{year}">
 
@@ -89,7 +89,7 @@
             <input type="number" id="month" th:field="*{month}">
 
             <label>Typ operacii:</label>
-            <select id="operationTypeFilter" th:field="*{operationType}">
+            <select id="operationTypeFilter" th:field="*{financialTransactionType}">
                 <option value="" selected>All</option>
                 <option value="INCOME">Income</option>
                 <option value="EXPENSE">Expense</option>

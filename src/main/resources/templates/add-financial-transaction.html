@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add transaction</title>
+</head>
+<body>
+    <div>Complete the form:</div>
+    <br>
+    <form action="/add-transaction" method="post">
+        <label>Transaction type:</label>
+        <select id="financialTransactionType" name="financialTransactionType" required>
+            <option value="" disabled selected>Transaction type</option>
+            <option value="INCOME">Income</option>
+            <option value="EXPENSE">Expense</option>
+        </select>
+
+        <label>Amount:</label>
+        <input type="number" step="any" name="amount" required>
+
+        <label>Date:</label>
+        <input type="date" name="date" required>
+
+        <label>Category:</label>
+        <input type="text" name="category" required>
+
+        <button type="submit">Add</button>
+    </form>
+    <br>
+        <button>
+            <a href="/">Cancel</a>
+        </button>
+
+</body>
+</html>

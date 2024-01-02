@@ -19,7 +19,7 @@ public class LoginController {
 
     @PostMapping( "/login-processing" )
     public String login( @RequestParam( "username" ) String username,
-                       @RequestParam( "password" ) String password ) {
+                         @RequestParam( "password" ) String password ) {
 
         loginService.login( username, password );
         return "redirect:/";

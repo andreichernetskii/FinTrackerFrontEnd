@@ -2,19 +2,19 @@ package com.example.finmangerfrontend.dto;
 
 import java.math.BigDecimal;
 
-public class Operation {
+public class FinancialTransaction {
     private Long id;
-    private OperationType operationType;
+    private FinancialTransactionType financialTransactionType;
     private BigDecimal amount;
     private String category;
     private String date;
 
-    public Operation() {
+    public FinancialTransaction() {
     }
 
-    public Operation( Long id, OperationType operationType, BigDecimal amount, String category, String date ) {
+    public FinancialTransaction( Long id, FinancialTransactionType financialTransactionType, BigDecimal amount, String category, String date ) {
         this.id = id;
-        this.operationType = operationType;
+        this.financialTransactionType = financialTransactionType;
         this.amount = amount;
         this.category = category;
         this.date = date;
@@ -26,8 +26,8 @@ public class Operation {
         return id;
     }
 
-    public OperationType getOperationType() {
-        return operationType;
+    public FinancialTransactionType getFinancialTransactionType() {
+        return financialTransactionType;
     }
 
     public BigDecimal getAmount() {
@@ -48,13 +48,13 @@ public class Operation {
         this.id = id;
     }
 
-    public void setOperationType( OperationType operationType ) {
-        this.operationType = operationType;
+    public void setFinancialTransactionType( FinancialTransactionType financialTransactionType ) {
+        this.financialTransactionType = financialTransactionType;
     }
 
     public void setAmount( BigDecimal amount ) {
         BigDecimal tempAmount = amount.abs();
-        this.amount = ( this.operationType == OperationType.EXPENSE ) ? tempAmount.negate() : tempAmount;
+        this.amount = ( this.financialTransactionType == FinancialTransactionType.EXPENSE ) ? tempAmount.negate() : tempAmount;
     }
 
     public void setCategory( String category ) {
@@ -67,8 +67,8 @@ public class Operation {
 
     @Override
     public String toString() {
-        return "IncomeExpenseManager {" +
-                "operationType=" + operationType +
+        return "FinancialTransactionManager {" +
+                "financialTransactionType=" + financialTransactionType +
                 ", amount=" + amount +
                 ", category='" + category + '\'' +
                 ", date='" + date + '\'' +

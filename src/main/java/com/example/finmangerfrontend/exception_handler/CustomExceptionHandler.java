@@ -24,9 +24,14 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         if ( statusCode == HttpStatus.UNAUTHORIZED ) {
             modelAndView = new ModelAndView( "redirect:/login" );
             modelAndView.addObject( "error", "Unauthorized" );
+
+        } else if ( statusCode == HttpStatus.resolve( 500 ) ){
+            modelAndView = new ModelAndView( "redirect:/login" );
+            modelAndView.addObject( "error", "Unauthorized" );
+
         } else {
             modelAndView = new ModelAndView( "error" );
-            modelAndView.addObject("error", "Server error");
+            modelAndView.addObject("error", exception.getMessage());
         }
 
         return modelAndView;

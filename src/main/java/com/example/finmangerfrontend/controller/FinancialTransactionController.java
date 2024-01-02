@@ -2,7 +2,7 @@ package com.example.finmangerfrontend.controller;
 
 import com.example.finmangerfrontend.dto.Alert;
 import com.example.finmangerfrontend.dto.FilterParameters;
-import com.example.finmangerfrontend.dto.Operation;
+import com.example.finmangerfrontend.dto.FinancialTransaction;
 import com.example.finmangerfrontend.service.ApiService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,31 +12,31 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
-public class OperationController {
+public class FinancialTransactionController {
     private final ApiService apiService;
 
-    public OperationController( ApiService apiService ) {
+    public FinancialTransactionController( ApiService apiService ) {
         this.apiService = apiService;
     }
 
-    @GetMapping( "/add-operation" )
+    @GetMapping( "/add-financial-transaction" )
     public String showAddIncomeExpensesFormPage() {
-        return "add-operation.html";
+        return "add-financial-transaction";
     }
 
-    @GetMapping( "/operations" )
+    @GetMapping( "/financial-transactions" )
     public String showOperationsByCriteria( Model model, FilterParameters filterParameters ) {
-        List<Operation> operations = apiService.getOperations( filterParameters );
+        List<FinancialTransaction> financialTransactions = apiService.getOperations( filterParameters );
         Double totalAmount = apiService.getAnnualBalance( filterParameters );
         List<String> categories = apiService.getCategories();
         List<Alert> alerts = apiService.getAlerts();
 
         model.addAttribute( "filter", filterParameters );
-        model.addAttribute( "operations", operations );
+        model.addAttribute( "operations", financialTransactions );
         model.addAttribute( "totalAmount", totalAmount );
         model.addAttribute( "categories", categories );
         model.addAttribute( "alerts", alerts );
-        return "operations.html";
+        return "financial-transactions.html";
     }
 
     @PostMapping( "/delete" )
@@ -45,15 +45,15 @@ public class OperationController {
         return "redirect:/operations";
     }
 
-    @PostMapping( "/add-operation" )
-    public String sendNewIncomeExpense( Operation operation ) {
-        apiService.sendNewIncomeExpense( operation );
+    @PostMapping( "/add-transaction" )
+    public String sendNewIncomeExpense( FinancialTransaction financialTransaction ) {
+        apiService.sendNewIncomeExpense( financialTransaction );
         return "redirect:/"; // here we are returning to main page without any repeated "calculations"
     }
 
-    @PostMapping( "/update-operation" )
-    public String updateIncomeExpense( Operation operation ) {
-        apiService.updateIncomeExpense( operation );
+    @PostMapping( "/update-transaction" )
+    public String updateIncomeExpense( FinancialTransaction financialTransaction ) {
+        apiService.updateIncomeExpense( financialTransaction );
         return "redirect:/operations";
     }
 }

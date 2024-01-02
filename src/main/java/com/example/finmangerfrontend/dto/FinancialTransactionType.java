@@ -1,6 +1,6 @@
 package com.example.finmangerfrontend.dto;
 
-public enum OperationType {
+public enum FinancialTransactionType {
     INCOME,
     EXPENSE
 }
