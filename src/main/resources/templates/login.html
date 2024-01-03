@@ -10,6 +10,12 @@
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body>
+<!--error message-->
+    <div th:if="${param.error}" class="error-dialog">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
+<!--login form-->
     <div class="container">
         <form action="/login-processing" method="post" >
             <h2 class="form-signin-heading">Please, login to the app</h2>
@@ -23,7 +29,7 @@
             </p>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
             <p>
-               <a href="/registration">Sign up</a>, if you haven't got account
+                <a href="/registration">Sign up</a>, if you haven't got account
             </p>
         </form>
     </div>

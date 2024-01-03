@@ -54,3 +54,10 @@ td, th {
     background-image: url("/static/edit-icon.png");
 }
 
+.error-dialog {
+    background-color: #ffcccc;
+    padding: 10px;
+    border: 1px solid #ff0000;
+    margin-bottom: 10px;
+}
+
