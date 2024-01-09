@@ -60,4 +60,8 @@ public class ApiService {
         String url = "http://localhost:8080/api/v1/alerts/";
         return restTemplate.getForObject( url, List.class );
     }
+
+//    public String getUserName() {
+//        String url =
+//    }
 }

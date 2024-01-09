@@ -12,11 +12,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 public class StatefulRestTemplateInterceptor implements ClientHttpRequestInterceptor {
     private String cookie;
+    private String responseBody;
 
     // catching cookies from response for next using
     @Override
@@ -25,6 +27,7 @@ public class StatefulRestTemplateInterceptor implements ClientHttpRequestInterce
 
         ClientHttpResponse response = execution.execute( request, body );
         List<String> cookies = response.getHeaders().get( HttpHeaders.SET_COOKIE );
+        responseBody = response.getBody().toString();
 
         if ( cookies != null ) {
             // refresh cookies after every getting them from backend
@@ -36,5 +39,9 @@ public class StatefulRestTemplateInterceptor implements ClientHttpRequestInterce
         }
 
         return response;
+    }
+
+    public String getBody() {
+        return responseBody;
     }
 }

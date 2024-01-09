@@ -1,9 +1,16 @@
 package com.example.finmangerfrontend.service;
 
+import com.example.finmangerfrontend.configuration.StatefulRestTemplateInterceptor;
 import com.example.finmangerfrontend.dto.ApplicationUser;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 // todo: zmienić nazwę
 @Service
@@ -19,6 +26,7 @@ public class LoginService {
         ApplicationUser applicationUser = new ApplicationUser( username, password );
 
         ResponseEntity<String> response = restTemplate.postForEntity( loginUrl, applicationUser, String.class );
+        String str = getUsernameForShow();
 
         return response.getBody();
     }
@@ -37,5 +45,17 @@ public class LoginService {
         ResponseEntity<String> response = restTemplate.postForEntity( registrationUrl, applicationUser, String.class );
 
         return response.getBody();
+    }
+
+    public String getUsernameForShow() {
+        String body = null;
+
+        for ( ClientHttpRequestInterceptor interceptor : restTemplate.getInterceptors() ) {
+            if ( interceptor instanceof StatefulRestTemplateInterceptor ) {
+                body = ((StatefulRestTemplateInterceptor) interceptor).getBody();
+            }
+        }
+
+        return body;
     }
 }
