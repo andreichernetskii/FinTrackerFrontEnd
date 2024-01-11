@@ -3,7 +3,9 @@ package com.example.finmangerfrontend.controller;
 import com.example.finmangerfrontend.dto.Alert;
 import com.example.finmangerfrontend.dto.FilterParameters;
 import com.example.finmangerfrontend.dto.FinancialTransaction;
-import com.example.finmangerfrontend.service.ApiService;
+import com.example.finmangerfrontend.service.AlertService;
+import com.example.finmangerfrontend.service.FinancialTransactionService;
+import com.example.finmangerfrontend.service.CategoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,12 +13,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
-@Controller
+//@Controller
 public class FinancialTransactionController {
-    private final ApiService apiService;
+    private final FinancialTransactionService financialTransactionService;
+    private final CategoryService categoryService;
+    private final AlertService alertService;
 
-    public FinancialTransactionController( ApiService apiService ) {
-        this.apiService = apiService;
+    public FinancialTransactionController( FinancialTransactionService financialTransactionService, CategoryService categoryService, AlertService alertService ) {
+        this.financialTransactionService = financialTransactionService;
+        this.categoryService = categoryService;
+        this.alertService = alertService;
     }
 
     @GetMapping( "/add-financial-transaction" )
@@ -26,10 +32,10 @@ public class FinancialTransactionController {
 
     @GetMapping( "/financial-transactions" )
     public String showOperationsByCriteria( Model model, FilterParameters filterParameters ) {
-        List<FinancialTransaction> financialTransactions = apiService.getOperations( filterParameters );
-        Double totalAmount = apiService.getAnnualBalance( filterParameters );
-        List<String> categories = apiService.getCategories();
-        List<Alert> alerts = apiService.getAlerts();
+        List<FinancialTransaction> financialTransactions = financialTransactionService.getFinancialTransactions( filterParameters );
+        Double totalAmount = financialTransactionService.getAnnualBalance( filterParameters );
+        List<String> categories = categoryService.getCategories();
+        List<Alert> alerts = alertService.getAlerts();
 
         model.addAttribute( "filter", filterParameters );
         model.addAttribute( "financialTransactions", financialTransactions );
@@ -41,19 +47,19 @@ public class FinancialTransactionController {
 
     @PostMapping( "/delete" )
     public String deleteOperation( Long id ) {
-        apiService.deleteOperation( id );
+        financialTransactionService.deleteFinancialTransaction( id );
         return "redirect:/operations";
     }
 
     @PostMapping( "/add-transaction" )
     public String sendNewIncomeExpense( FinancialTransaction financialTransaction ) {
-        apiService.sendNewIncomeExpense( financialTransaction );
+        financialTransactionService.senNewFinancialTransaction( financialTransaction );
         return "redirect:/"; // here we are returning to main page without any repeated "calculations"
     }
 
     @PostMapping( "/update-transaction" )
     public String updateIncomeExpense( FinancialTransaction financialTransaction ) {
-        apiService.updateIncomeExpense( financialTransaction );
+        financialTransactionService.updateFinancialTransaction( financialTransaction );
         return "redirect:/operations";
     }
 }

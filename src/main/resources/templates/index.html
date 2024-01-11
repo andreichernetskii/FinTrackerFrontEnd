@@ -2,19 +2,265 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FinApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+
+    </style>
 </head>
 <body>
-    <div>Options:</div>
-    <a href="/add-financial-transaction">Add transaction</a>
-    <br>
-    <a href="/financial-transactions">Show list of transactions</a>
-    <br>
-    <a href="/limits">Limit controls</a>
-    <br>
-    <br>
-    <form action="/logout-user" method="post">
-        <button type="submit">Logout</button>
-    </form>
+
+<div class="container">
+
+    <div id="transactions" class="inner-zone">
+
+<!--        Adding new transaction -->
+
+        <div>Add new transaction:</div>
+        <form action="/add-transaction" method="post">
+            <label>Transaction type:</label>
+            <select id="financialTransactionType" name="financialTransactionType" required>
+                <option value="" disabled selected>Transaction type</option>
+                <option value="INCOME">Income</option>
+                <option value="EXPENSE">Expense</option>
+            </select>
+
+            <label>Amount:</label>
+            <input type="number" step="any" name="amount" required>
+
+            <label>Date:</label>
+            <input type="date" name="date" required>
+
+            <label>Category:</label>
+            <input type="text" name="category" required>
+
+            <button type="submit">Add</button>
+        </form>
+
+<!--        Table of operations-->
+
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Category</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="financialTransaction : ${financialTransactions}">
+                <td th:text="${financialTransaction.id}"></td>
+                <td th:text="${financialTransaction.date}"></td>
+                <td th:text="${financialTransaction.amount}"></td>
+                <td th:text="${financialTransaction.category}"></td>
+                <td>
+                    <button class="editBtn btnWithImage" id="editBtn" title="Edit"
+                            th:attr="data-id=${financialTransaction.id},
+                        data-type=${financialTransaction.financialTransactionType},
+                        data-amount=${financialTransaction.amount},
+                        data-date=${financialTransaction.date},
+                        data-category=${financialTransaction.category}">
+                    </button>
+                </td>
+                <td>
+                    <form th:action="@{/delete-transaction}" method="post">
+                        <input type="hidden" name="id" th:value="${financialTransaction.id}" />
+                        <button type="submit" class="btnWithImage" id="deleteBtn" th:attr="data-id=${financialTransaction.id}"
+                                onclick="return confirm('Do you want delete transaction with ID: ' + this.getAttribute('data-id') + '?')"
+                                title="Delete"></button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+<!--        Transaction edit field (hidden while not used)-->
+
+        <div id="dialog" class="hidden">
+            <h2>Edit transaction:</h2>
+            <form action="update-transaction" method="post">
+                <label>Transaction ID</label>
+                <input type="number" name="Id" id="id" readonly>
+
+                <label>Transaction type:</label>
+                <select id="type" name="financialTransactionType">
+                    <option value="" disabled selected>Transaction type</option>
+                    <option value="INCOME">Income</option>
+                    <option value="EXPENSE">Expense</option>
+                </select>
+
+                <label>Amount</label>
+                <input type="number" step="any" name="amount" id="amount" required>
+
+                <label>Date</label>
+                <input type="date" name="date" id="date" required readonly>
+
+                <label>Category</label>
+                <input type="text" name="category" id="category" required>
+
+                <button id="submitBtn" type="submit">Edit</button>
+                <button id="cancelDialogBtn" type="button">Cancel</button>
+            </form>
+        </div>
+
+    </div>
+
+<!--    Right zone on display-->
+
+    <div id="right-zone">
+        <div id="user-instruments" class="inner-zone">
+
+            <form action="/logout-user" method="post">
+                <button type="submit">Logout</button>
+            </form>
+
+        </div>
+
+        <div id="transactions-filter" class="inner-zone">
+
+<!--            Transactions sorting zone-->
+
+            <div>Sort transactions: </div>
+            <form action="/financial-transactions" method="get" th:object="${filter}">
+
+                <input class="short-input" placeholder="Year" type="number"  id="year" th:field="*{year}">
+
+                <input class="short-input" placeholder="Month" type="number" id="month" th:field="*{month}">
+
+                <select id="operationTypeFilter" th:field="*{financialTransactionType}">
+                    <option value="" selected>All types</option>
+                    <option value="INCOME">Income</option>
+                    <option value="EXPENSE">Expense</option>
+                </select>
+
+                <select id="categoryFilter" th:field="*{category}">
+                    <option value="" selected>All categories</option>
+                    <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
+                </select>
+
+                <button id="submitStatsBtn" type="submit">Submit</button>
+
+                <br>
+                <br>
+
+                <label>Total:
+                    <span id="totalAmountValue" th:text="${totalAmount}"></span>
+                </label>
+
+            </form>
+
+        </div>
+
+<!--        Limits zone-->
+
+        <div id="limits" class="inner-zone">
+
+<!--            Set new limit-->
+
+            <div>Set limit:</div>
+
+            <form action="/add-new-limit" method="post">
+                <input placeholder="Amount" type="number" step="any" name="limitAmount" required>
+
+                <select name="limitType" required>
+                    <option value="" disabled selected>Limit period</option>
+                    <option th:each="limitType : ${limitTypes}" th:if="${limitType != 'ZERO'}" th:value="${limitType}" th:text="${limitType}"></option>
+                </select>
+
+                <select name="category">
+                    <option value="" selected>All categories</option>
+                    <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
+                </select>
+
+                <button type="submit">Submit</button>
+            </form>
+
+<!--            Limits table-->
+
+            <table>
+                <thead>
+                <tr>
+                    <th>Limit amount</th>
+                    <th>Limit type</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="limit : ${limits}">
+                    <td th:text="${limit.limitAmount}"></td>
+                    <td th:text="${limit.limitType}"></td>
+                    <td th:text="${limit.category}"></td>
+                    <td th:text="${limit.creationDate}"></td>
+                    <td>
+                        <button class="editBtn btnWithImage" id="editBtn" title="Edit"
+                                th:attr="data-id=${limit.id},
+                  data-type=${limit.limitType},
+                  data-amount=${limit.limitAmount},
+                  data-date=${limit.creationDate},
+                  data-category=${limit.category}">
+                        </button>
+                    </td>
+                    <td>
+                        <form th:action="@{/delete-limit}" method="post">
+                            <input type="hidden" name="id" th:value="${limit.id}" />
+                            <button type="submit" class="btnWithImage" id="deleteBtn" th:attr="data-id=${limit.id}"
+                                    onclick="return confirm('Czy jesteś pewien/pewna, że chcesz usunąć limit z id: ' + this.getAttribute('data-id') + '?')"
+                                    title="Delete"></button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+<!--            Limits edition filed (hidden)-->
+
+            <div id="dialog" class="hidden">
+                <h2>Edit limit:</h2>
+                <form action="update-limit" method="post">
+                    <label>Limit Id</label>
+                    <input type="number" name="Id" id="id" readonly>
+
+                    <label>Limit type:</label>
+                    <select id="type" name="limitType">
+                        <option value="" disabled selected>Limit type</option>
+                        <option th:each="limitType : ${limitTypes}" th:if="${limitType != 'ZERO'}" th:value="${limitType}" th:text="${limitType}"></option>
+                    </select>
+
+                    <label>Amount</label>
+                    <input type="number" step="any" name="amount" id="amount" required>
+
+                    <label>Date</label>
+                    <input type="date" name="date" id="date" required readonly>
+
+                    <label>Category</label>
+                    <select name="category">
+                        <option value="" selected>All categories</option>
+                        <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
+                    </select>
+
+                    <button id="submitBtn" type="submit">Edit</button>
+                    <button id="cancelDialogBtn" type="button">Cancel</button>
+                </form>
+            </div>
+
+        </div>
+
+<!--        Alerts filed-->
+
+        <div id="alerts" class="inner-zone">
+
+            <div>Alerts field</div>
+
+            <div th:each="alert : ${alerts}">
+                <label th:text="${alert.message}"></label>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 </body>
 </html>

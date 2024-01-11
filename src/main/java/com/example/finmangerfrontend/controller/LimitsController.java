@@ -1,7 +1,8 @@
 package com.example.finmangerfrontend.controller;
 
 import com.example.finmangerfrontend.dto.Limit;
-import com.example.finmangerfrontend.service.ApiService;
+import com.example.finmangerfrontend.service.FinancialTransactionService;
+import com.example.finmangerfrontend.service.CategoryService;
 import com.example.finmangerfrontend.service.LimitsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,20 +12,22 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 
-@Controller
+//@Controller
 public class LimitsController {
     private final LimitsService limitsService;
-    private final ApiService apiService;
+    private final FinancialTransactionService financialTransactionService;
+    private final CategoryService categoryService;
 
-    public LimitsController( LimitsService limitsService, ApiService apiService ) {
+    public LimitsController( LimitsService limitsService, FinancialTransactionService financialTransactionService, CategoryService categoryService ) {
         this.limitsService = limitsService;
-        this.apiService = apiService;
+        this.financialTransactionService = financialTransactionService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping( "/limits" )
     public String showLimits( Model model ) {
         List<Limit> limits = limitsService.getLimits();
-        List<String> categories = apiService.getCategories();
+        List<String> categories = categoryService.getCategories();
         List<String> limitTypes = limitsService.getLimitTypes();
         model.addAttribute( "limits", limits );
         model.addAttribute( "categories", categories );

@@ -1,6 +1,5 @@
 package com.example.finmangerfrontend.service;
 
-import com.example.finmangerfrontend.dto.Alert;
 import com.example.finmangerfrontend.dto.FilterParameters;
 import com.example.finmangerfrontend.dto.FinancialTransaction;
 import org.springframework.core.ParameterizedTypeReference;
@@ -12,26 +11,26 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Service
-public class ApiService {
+public class FinancialTransactionService {
     private final RestTemplate restTemplate;
 
-    public ApiService( RestTemplate restTemplate ) {
+    public FinancialTransactionService( RestTemplate restTemplate ) {
         this.restTemplate = restTemplate;
     }
 
-    public void sendNewIncomeExpense( FinancialTransaction financialTransaction ) {
+    public void senNewFinancialTransaction( FinancialTransaction financialTransaction ) {
         restTemplate.postForEntity( "http://localhost:8080/api/v1/transactions/", financialTransaction, String.class );
     }
 
-    public void deleteOperation( Long id ) {
+    public void deleteFinancialTransaction( Long id ) {
         restTemplate.delete( "http://localhost:8080/api/v1/transactions/" + id );
     }
 
-    public void updateIncomeExpense( FinancialTransaction financialTransaction ) {
+    public void updateFinancialTransaction( FinancialTransaction financialTransaction ) {
         restTemplate.put( "http://localhost:8080/api/v1/transactions/", financialTransaction );
     }
 
-    public List<FinancialTransaction> getOperations( FilterParameters filterParameters ) {
+    public List<FinancialTransaction> getFinancialTransactions( FilterParameters filterParameters ) {
         String filter = filterParameters.getParamsAsURL();
         String url = "http://localhost:8080/api/v1/transactions/" + filter;
 
@@ -50,18 +49,5 @@ public class ApiService {
         return response;
     }
 
-    public List<String> getCategories() {
-        String url = "http://localhost:8080/api/v1/transactions/categories?";
-        List<String> categories = restTemplate.getForObject( url, List.class );
-        return categories;
-    }
 
-    public List<Alert> getAlerts() {
-        String url = "http://localhost:8080/api/v1/alerts/";
-        return restTemplate.getForObject( url, List.class );
-    }
-
-//    public String getUserName() {
-//        String url =
-//    }
 }
