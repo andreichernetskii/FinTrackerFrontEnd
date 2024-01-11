@@ -26,6 +26,7 @@ public class LimitsService {
     }
 
     public void addNewLimit( Limit limit ) {
+        limit.setCreationDate( LocalDate.now() ); // todo should it be inside setter?
         String url = "http://localhost:8080/api/v1/limits/";
         restTemplate.postForEntity( url, limit, String.class );
     }
