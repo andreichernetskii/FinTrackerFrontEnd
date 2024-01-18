@@ -49,5 +49,9 @@ public class FinancialTransactionService {
         return response;
     }
 
+    public List<String> getTransactionTypes() {
+        String url = "http://localhost:8080/api/v1/transactions/types";
+        return restTemplate.getForObject( url, List.class );
+    }
 
 }
