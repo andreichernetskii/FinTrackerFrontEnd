@@ -11,6 +11,7 @@
 
 <div class="container">
 
+<!--    Left side-->
     <div id="transactions" class="inner-zone">
 
 <!--        Adding new transaction -->
@@ -20,8 +21,10 @@
 
             <select id="financialTransactionType" name="financialTransactionType" required>
                 <option value="" disabled selected>Transaction type</option>
-                <option value="INCOME">Income</option>
-                <option value="EXPENSE">Expense</option>
+                <option th:each="transactionType : ${transactionTypes}"
+                        th:value="${transactionType}"
+                        th:text="${transactionType}">
+                </option>
             </select>
 
             <input type="number" step="any" name="amount" placeholder="Amount" required>
@@ -80,42 +83,8 @@
 
             </tbody>
         </table>
-
-<!--        Transaction edit field (hidden while not used)-->
-
-        <div id="dialog" class="hidden">
-
-            <h2>Edit transaction:</h2>
-
-            <form action="update-transaction" method="post">
-
-                <label>Transaction ID</label>
-                <input type="number" name="Id" id="id" readonly>
-
-                <label>Transaction type:</label>
-                <select id="type" name="financialTransactionType">
-                    <option value="" disabled selected>Transaction type</option>
-                    <option value="INCOME">Income</option>
-                    <option value="EXPENSE">Expense</option>
-                </select>
-
-                <label>Amount</label>
-                <input type="number" step="any" name="amount" id="amount" required>
-
-                <label>Date</label>
-                <input type="date" name="date" id="date" required readonly>
-
-                <label>Category</label>
-                <input type="text" name="category" id="category" required>
-
-                <button id="submitBtn" type="submit">Edit</button>
-                <button id="cancelDialogBtn" type="button">Cancel</button>
-
-            </form>
-
-        </div>
-
     </div>
+
 
 <!--    Right zone on display-->
 
@@ -178,8 +147,12 @@
                 <input placeholder="Amount" type="number" step="any" name="limitAmount" required>
 
                 <select name="limitType" required>
-                    <option value="" disabled selected>Limit period</option>
-                    <option th:each="limitType : ${limitTypes}" th:if="${limitType != 'ZERO'}" th:value="${limitType}" th:text="${limitType}"></option>
+                    <option value="" disabled selected>Limit type</option>
+                    <option th:each="limitType : ${limitTypes}"
+                            th:if="${limitType != 'ZERO'}"
+                            th:value="${limitType}"
+                            th:text="${limitType}">
+                    </option>
                 </select>
 
                 <select name="category">
@@ -241,34 +214,34 @@
 
 <!--            Limits edition filed (hidden)-->
 
-            <div id="dialog" class="hidden">
-                <h2>Edit limit:</h2>
-                <form action="update-limit" method="post">
-                    <label>Limit Id</label>
-                    <input type="number" name="Id" id="id" readonly>
+<!--            <section id="dialog" class="hidden">-->
+<!--                <h2>Edit limit:</h2>-->
+<!--                <form action="update-limit" method="post">-->
+<!--                    <label>Limit Id</label>-->
+<!--                    <input type="number" name="Id" id="id" readonly>-->
 
-                    <label>Limit type:</label>
-                    <select id="type" name="limitType">
-                        <option value="" disabled selected>Limit type</option>
-                        <option th:each="limitType : ${limitTypes}" th:if="${limitType != 'ZERO'}" th:value="${limitType}" th:text="${limitType}"></option>
-                    </select>
+<!--                    <label>Limit type:</label>-->
+<!--                    <select id="type" name="limitType">-->
+<!--                        <option value="" disabled selected>Limit type</option>-->
+<!--                        <option th:each="limitType : ${limitTypes}" th:if="${limitType != 'ZERO'}" th:value="${limitType}" th:text="${limitType}"></option>-->
+<!--                    </select>-->
 
-                    <label>Amount</label>
-                    <input type="number" step="any" name="amount" id="amount" required>
+<!--                    <label>Amount</label>-->
+<!--                    <input type="number" step="any" name="amount" id="amount" required>-->
 
-                    <label>Date</label>
-                    <input type="date" name="date" id="date" required readonly>
+<!--                    <label>Date</label>-->
+<!--                    <input type="date" name="date" id="date" required readonly>-->
 
-                    <label>Category</label>
-                    <select name="category">
-                        <option value="" selected>All categories</option>
-                        <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
-                    </select>
+<!--                    <label>Category</label>-->
+<!--                    <select name="category">-->
+<!--                        <option value="" selected>All categories</option>-->
+<!--                        <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>-->
+<!--                    </select>-->
 
-                    <button id="submitBtn" type="submit">Edit</button>
-                    <button id="cancelDialogBtn" type="button">Cancel</button>
-                </form>
-            </div>
+<!--                    <button id="submitBtn" type="submit">Edit</button>-->
+<!--                    <button id="cancelDialogBtn" type="button">Cancel</button>-->
+<!--                </form>-->
+<!--            </section>-->
 
         </div>
 
@@ -285,6 +258,42 @@
         </div>
 
     </div>
+
+</div>
+
+    <!--        Edit modal field (hidden while not used)-->
+
+<div id="dialog" class="hidden">
+
+    <h2>Edit:</h2>
+
+    <form action="update-entity" method="post">
+
+        <label>ID:</label>
+        <input type="number" name="Id" id="id" readonly>
+
+        <label>Transaction type:</label>
+        <select id="type" name="type">
+            <option value="" disabled selected>Type</option>
+            <option value="INCOME">Income</option>
+            <option value="EXPENSE">Expense</option>
+        </select>
+
+        <label>Amount:</label>
+        <input type="number" step="any" name="amount" id="transaction-amount" required>
+
+        <label>Date:</label>
+        <input type="date" name="date" id="transaction-date" required readonly>
+
+        <label>Category:</label>
+        <input type="text" name="transaction-category" id="category" required>
+
+        <button id="submitBtn" type="submit">Edit</button>
+        <button id="cancelDialogBtn" type="button">Cancel</button>
+
+    </form>
+
+</div>
 
 </div>
 
