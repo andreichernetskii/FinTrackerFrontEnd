@@ -24,6 +24,14 @@ table {
     float: left;
 }
 
+table {
+    width: 90%;
+}
+
+tr:hover {
+    background-color: coral
+}
+
 td, th {
     padding: 2px;
     border: 1px solid black;
@@ -38,36 +46,8 @@ td, th {
     clear: both;
 }
 
-#dialog {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
 .hidden {
     display: none;
-}
-
-.btnWithImage {
-    background-size: contain;
-    background-position: center;
-
-    width: 20px;
-    height: 20px;
-    border: none;
-    cursor: pointer;
-}
-
-#deleteBtn {
-    background-image: url("/static/trash-icon.png");
-}
-
-#editBtn {
-    background-image: url("/static/edit-icon.png");
 }
 
 .error-dialog {
@@ -83,13 +63,45 @@ td, th {
     overflow: hidden;
 }
 
+.btnWithImage {
+    background-size: contain;
+    background-position: center;
+
+    width: 20px;
+    height: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.editBtn {
+    background-image: url("/static/img/edit-icon.png");
+}
+
+.deleteBtn {
+    background-image: url("/static/img/trash-icon.png");
+}
+
+#dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/*#limit-editBtn {*/
+/*    background-image: url("/static/edit-icon.png");*/
+/*}*/
+
 #transactions {
-    flex: 0 0 60%;
+    flex: 0 0 55%;
     background-color: #f0f0f0;
 }
 
 #right-zone {
-    flex: 0 0 40%;
+    flex: 0 0 45%;
     display: flex;
     flex-direction: column;
 }
@@ -105,11 +117,11 @@ td, th {
 }
 
 #limits {
-    flex: 0 0 55%;
+    flex: 0 0 50%;
     background-color: #c0c0c0;
 }
 
 #alerts {
-    flex: 0 0 20%;
+    flex: 0 0 25%;
     background-color: #a0a0a0;
 }

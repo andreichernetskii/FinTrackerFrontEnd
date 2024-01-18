@@ -1,5 +1,5 @@
 // getting refs of dialog window and form elements
-const dialog = document.getElementById('dialog');
+const dialog = document.getElementById('transaction-dialog');
 const idInput = document.getElementById('id');
 const typeInput = document.getElementById('type');
 const amountInput = document.getElementById('amount');
