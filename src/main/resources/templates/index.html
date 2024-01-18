@@ -61,10 +61,11 @@
 
                     <button class="editBtn btnWithImage" id="transaction-editBtn" title="Edit"
                             th:attr="data-id=${financialTransaction.id},
-                        data-type=${financialTransaction.financialTransactionType},
-                        data-amount=${financialTransaction.amount},
-                        data-date=${financialTransaction.date},
-                        data-category=${financialTransaction.category}">
+                            data-type=${financialTransaction.financialTransactionType},
+                            data-all-types=${transactionTypes},
+                            data-amount=${financialTransaction.amount},
+                            data-date=${financialTransaction.date},
+                            data-category=${financialTransaction.category}">
                     </button>
 
                 </td>
@@ -72,7 +73,7 @@
 
                     <form th:action="@{/delete-transaction}" method="post">
                         <input type="hidden" name="id" th:value="${financialTransaction.id}" />
-                        <button class="deleteBtn btnWithImage" id="deleteBtn" type="submit"  th:attr="data-id=${financialTransaction.id}"
+                        <button class="deleteBtn btnWithImage" type="submit"  th:attr="data-id=${financialTransaction.id}"
                                 onclick="return confirm('Do you want delete transaction with ID: ' + this.getAttribute('data-id') + '?')"
                                 title="Delete"></button>
                     </form>
@@ -118,7 +119,9 @@
 
                 <select id="categoryFilter" th:field="*{category}">
                     <option value="" selected>All categories</option>
-                    <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
+                    <option th:each="category : ${categories}"
+                            th:value="${category}"
+                            th:text="${category}"></option>
                 </select>
 
                 <button id="submitStatsBtn" type="submit">Submit</button>
@@ -157,7 +160,9 @@
 
                 <select name="category">
                     <option value="" selected>All categories</option>
-                    <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
+                    <option th:each="category : ${categories}"
+                            th:value="${category}"
+                            th:text="${category}"></option>
                 </select>
 
                 <button type="submit">Submit</button>
@@ -188,10 +193,11 @@
                     <td align="center" width="10px">
                         <button class="editBtn btnWithImage" id="limit-editBtn" title="Edit"
                                 th:attr="data-id=${limit.id},
-                                  data-type=${limit.limitType},
-                                  data-amount=${limit.limitAmount},
-                                  data-date=${limit.creationDate},
-                                  data-category=${limit.category}">
+                                data-type=${limit.limitType},
+                                data-all-types=${limitTypes},
+                                data-amount=${limit.limitAmount},
+                                data-date=${limit.creationDate},
+                                data-category=${limit.category}">
                         </button>
                     </td>
 
@@ -199,7 +205,7 @@
 
                         <form th:action="@{/delete-limit}" method="post">
                             <input type="hidden" name="id" th:value="${limit.id}" />
-                            <button class="deleteBtn btnWithImage" id="deleteBtn" type="submit" th:attr="data-id=${limit.id}"
+                            <button class="deleteBtn btnWithImage" type="submit" th:attr="data-id=${limit.id}"
                                     onclick="return confirm('Czy jesteś pewien/pewna, że chcesz usunąć limit z id: ' + this.getAttribute('data-id') + '?')"
                                     title="Delete"></button>
                         </form>
@@ -272,31 +278,24 @@
         <label>ID:</label>
         <input type="number" name="Id" id="id" readonly>
 
-        <label>Transaction type:</label>
         <select id="type" name="type">
-            <option value="" disabled selected>Type</option>
-            <option value="INCOME">Income</option>
-            <option value="EXPENSE">Expense</option>
+            <option value="" disabled selected></option>
         </select>
 
-        <label>Amount:</label>
-        <input type="number" step="any" name="amount" id="transaction-amount" required>
+        <input type="number" step="any" name="amount" id="amount" required>
 
-        <label>Date:</label>
-        <input type="date" name="date" id="transaction-date" required readonly>
+        <input type="date" name="date" id="date" required readonly>
 
-        <label>Category:</label>
-        <input type="text" name="transaction-category" id="category" required>
+        <input type="text" name="category" id="category">
 
         <button id="submitBtn" type="submit">Edit</button>
         <button id="cancelDialogBtn" type="button">Cancel</button>
 
     </form>
-
 </div>
 
 </div>
 
-<script src="/scripts/edit-transaction-promt.js"></script>
+<script src="/scripts/edit-script.js"></script>
 </body>
 </html>
