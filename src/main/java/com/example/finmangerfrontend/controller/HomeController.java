@@ -38,6 +38,8 @@ public class HomeController {
         List<FinancialTransaction> financialTransactions = transactionService.getFinancialTransactions( filterParameters );
         Double totalAmount = transactionService.getAnnualBalance( filterParameters );
         List<String> categories = categoryService.getCategories();
+        List<String> transactionTypes = transactionService.getTransactionTypes();
+
         List<Alert> alerts = alertService.getAlerts();
         List<Limit> limits = limitsService.getLimits();
         List<String> limitTypes = limitsService.getLimitTypes();
@@ -47,6 +49,8 @@ public class HomeController {
         model.addAttribute( "financialTransactions", financialTransactions );
         model.addAttribute( "totalAmount", totalAmount );
         model.addAttribute( "categories", categories );
+        model.addAttribute( "transactionTypes", transactionTypes );
+
         model.addAttribute( "alerts", alerts );
         model.addAttribute( "limits", limits );
         model.addAttribute( "categories", categories );
