@@ -9,9 +9,18 @@ const closeModal = function () {
     overlay.classList.add("hidden");
 };
 
+// open modal function
+const openModal = function () {
+    modal.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+};
+
+// open modal event
+openModalBtn.addEventListener("click", openModal);
+
 // close the modal when the close button and overlay is clicked
-closeModalBtn.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
+closeModalBtn.addEventListener("click", closeModal);
 
 // close modal when the Esc key is pressed
 document.addEventListener("keydown", function (e) {
@@ -20,10 +29,6 @@ document.addEventListener("keydown", function (e) {
     }
 });
 
-// open modal function
-const openModal = function () {
-    modal.classList.remove("hidden");
-    overlay.classList.remove("hidden");
-};
-// open modal event
-openModalBtn.addEventListener("click", openModal);
+
+
+
