@@ -191,7 +191,7 @@
                     <td th:text="${limit.creationDate}"></td>
 
                     <td align="center" width="10px">
-                        <button class="editBtn btnWithImage" id="limit-editBtn" title="Edit"
+                        <button class="editBtn btnWithImage limit-editBtn" title="Edit"
                                 th:attr="data-id=${limit.id},
                                 data-type=${limit.limitType},
                                 data-all-types=${limitTypes},
@@ -236,26 +236,26 @@
 
 </div>
 
-    <!--        Edit modal field (hidden while not used)-->
+<!--        Edit modal field (hidden while not used)-->
 
 <div id="dialog" class="hidden">
 
     <h2>Edit:</h2>
 
-    <form action="update-entity" method="post">
+    <form id="edit-form">
 
         <label>ID:</label>
-        <input type="number" name="Id" id="id" readonly>
+        <input type="number" id="id" readonly>
 
-        <select id="type" name="type">
+        <select id="type">
             <option value="" disabled selected></option>
         </select>
 
-        <input type="number" step="any" name="amount" id="amount" required>
+        <input type="number" step="any" id="amount" required>
 
-        <input type="date" name="date" id="date" required readonly>
+        <input type="date" id="date" required readonly>
 
-        <input type="text" name="category" id="category">
+        <input type="text" id="category">
 
         <button id="submitBtn" type="submit">Edit</button>
         <button id="cancelDialogBtn" type="button">Cancel</button>
