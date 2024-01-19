@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 
@@ -87,7 +86,7 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @PutMapping( "/update-limit" )
+    @PostMapping( "/update-limit" )
     public String updateLimit( Limit limit ) {
         limitsService.updateLimit( limit );
         return "redirect:/";
