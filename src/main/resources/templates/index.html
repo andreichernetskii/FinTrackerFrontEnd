@@ -65,7 +65,8 @@
                             data-all-types=${transactionTypes},
                             data-amount=${financialTransaction.amount},
                             data-date=${financialTransaction.date},
-                            data-category=${financialTransaction.category}">
+                            data-category=${financialTransaction.category},
+                            data-all-categories=${categories}">
                     </button>
 
                 </td>
@@ -197,7 +198,8 @@
                                 data-all-types=${limitTypes},
                                 data-amount=${limit.limitAmount},
                                 data-date=${limit.creationDate},
-                                data-category=${limit.category}">
+                                data-category=${limit.category},
+                                data-all-categories=${categories}">
                         </button>
                     </td>
 
@@ -247,15 +249,13 @@
         <label>ID:</label>
         <input type="number" id="id" readonly>
 
-        <select id="type">
-            <option value="" disabled selected></option>
-        </select>
+        <select id="type"></select>
 
         <input type="number" step="any" id="amount" required>
 
         <input type="date" id="date" required readonly>
 
-        <input type="text" id="category">
+        <select type="text" id="category"></select>
 
         <button id="submitBtn" type="submit">Edit</button>
         <button id="cancelDialogBtn" type="button">Cancel</button>
