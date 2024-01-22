@@ -13,23 +13,24 @@ document.querySelectorAll('.editBtn').forEach((btn) => {
 
         const id = btn.getAttribute('data-id');
         const type = btn.getAttribute('data-type');
-        const types = btn.getAttribute('data-all-types');
+        const types = createArray(btn.getAttribute('data-all-types'));
         const amount = btn.getAttribute('data-amount');
         const date = btn.getAttribute('data-date');
         const category = btn.getAttribute('data-category');
-
-        const array = types.replace(/([a-zA-Z]+)/g, '"$1"');
-        const typesArray = JSON.parse(array);
+        const categories = createArray(btn.getAttribute('data-all-categories'));
 
         // filling forms with data from row
         if (idInput) idInput.value = id;
         if (typeInput) {
-            addNewOptions(typesArray);
+            addTypesOptions(types);
             typeInput.value = type;
         }
         if (amountInput) amountInput.value = amount;
         if (dateInput) dateInput.value = date;
-        if (categoryInput) categoryInput.value = category;
+        if (categoryInput) {
+            addCategoriesOptions(categories);
+            categoryInput.value = category;
+        }
 
         if (dialog) {
             dialog.classList.remove('hidden');
@@ -77,8 +78,6 @@ document.getElementById('cancelDialogBtn').addEventListener('click', (event) => 
 
     if (dialog) {
         dialog.classList.add('hidden');
-        // typeInput.innerHTML = "";
-        // editForm.setAttribute("action", "");
         location.reload();
     }
 });
@@ -94,7 +93,12 @@ function centerDialog() {
     dialog.style.top = `${topPosition}px`;
 }
 
-function addNewOptions(array) {
+function createArray(objToArray) {
+    const array = objToArray.replace(/([a-zA-Z]+)/g, '"$1"');
+    return JSON.parse(array);
+}
+
+function addTypesOptions(array) {
 
     for (let i = 0; i < array.length; i++) {
         if (array[i] !== "ZERO") {
@@ -103,5 +107,15 @@ function addNewOptions(array) {
             option.text = array[i];
             typeInput.add(option);
         }
+    }
+}
+
+function addCategoriesOptions(array) {
+
+    for (let i = 0; i < array.length; i++) {
+        let option = document.createElement("option");
+        option.value = array[i];
+        option.text = array[i];
+        categoryInput.add(option);
     }
 }
