@@ -106,7 +106,7 @@
 
             <div>Sort transactions: </div>
 
-            <form action="/financial-transactions" method="get" th:object="${filter}">
+            <form action="" method="get" th:object="${filter}">
 
                 <input class="short-input" placeholder="Year" type="number"  id="year" th:field="*{year}">
 
@@ -261,8 +261,6 @@
         <button id="cancelDialogBtn" type="button">Cancel</button>
 
     </form>
-</div>
-
 </div>
 
 <script src="/scripts/edit-script.js"></script>
