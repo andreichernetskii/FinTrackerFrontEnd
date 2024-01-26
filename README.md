@@ -1,16 +1,17 @@
-## Financial Tracker Web-Application (Frontend Side)
+## Financial Tracker Web-Application (Client Side)
+Backend side: https://github.com/andreichernetskii/FinManagerBackEnd
 
 ### The Genesis
 This project emerged as a personal challenge for me to create a web application for tracking my financial transactions while living in a foreign country. The application serves as a practical test of my Java skills and demonstrates my ability to learn new concepts quickly and efficiently.
 
 ### Features
-- Adding new transactions: incomes and expences (amount, date, category).
-- Adding categories for expences or incomes (automaticly adds to Data Base while adding new transaction).
-- Sorting exists transactions by year, month type (income or expence), category.
-- Adding limits depend on timeline or timeline and category (for example day limit or day limit for groceries).
-- Editing or deleting transactions and limits.
-- When limit is expired, you will get a notiwication in field on right bottom.
-- User registration, login and logout with using JSON Web Token (JWT) on backend side.
+- **Adding New Transactions**: Incomes and expenses can be added with details such as amount, date, and category.
+- **Category Management**: Automatic addition of categories for expenses or incomes to the database when adding a new transaction.
+- **Sorting Transactions**: Existing transactions can be sorted by year, month, and type (income or expense), as well as by category.
+- **Setting Limits**: Users can set limits based on the timeline or both timeline and category (e.g., daily limit or daily limit for groceries).
+- **Transaction Management**: Users can edit or delete transactions and limits as needed.
+- **Limit Notifications**: Receive notifications in the bottom right corner when a limit expires.
+- **User Authentication**: The application provides user registration, login, and logout functionality using JSON Web Token (JWT) on the backend.e.
 
 ### UI
 _Main page_
@@ -30,5 +31,5 @@ _Edit dialog_
 ![edit-dialog](https://github.com/andreichernetskii/FinMangerFrontEnd/assets/73879364/0cf6fa72-ccce-437c-9eeb-6aa88eed8d26)
 
 ### How it works
-- Client adress - localhost:8081 .
+- Client adress - localhost:8081.
 - Client side of application conects to server side (localhost:8080) via RestTemplate object. 
