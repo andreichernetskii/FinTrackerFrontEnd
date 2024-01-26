@@ -95,7 +95,7 @@
         <div id="user-instruments" class="inner-zone">
 
             <form action="/logout-user" method="post">
-                <button type="submit">Logout</button>
+                <button type="submit" id="logoutBtn">Logout</button>
             </form>
 
         </div>
@@ -226,7 +226,7 @@
 
         <div id="alerts" class="inner-zone">
 
-            <div>Alerts field</div>
+            <div>Alerts:</div>
 
             <div th:each="alert : ${alerts}">
                 <label th:text="${alert.message}"></label>
