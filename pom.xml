@@ -74,6 +74,14 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+
+                    <image>
+                        <name>docker.io/your-repo/fin-manager-frontend</name>
+                        <env>
+                            <BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
+                        </env>
+                    </image>
+
                 </configuration>
             </plugin>
         </plugins>
