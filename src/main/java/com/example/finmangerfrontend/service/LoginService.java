@@ -47,6 +47,7 @@ public class LoginService {
         return response.getBody();
     }
 
+    // for showing in the upper right corner
     public String getUsernameForShow() {
         String body = null;
 
