@@ -22,7 +22,7 @@ public class LoginService {
     }
 
     public String login( String username, String password ) {
-        String loginUrl = "http://localhost:8080/api/auth/signin";
+        String loginUrl = "http://client-backend:8080/api/auth/signin";
         ApplicationUser applicationUser = new ApplicationUser( username, password );
 
         ResponseEntity<String> response = restTemplate.postForEntity( loginUrl, applicationUser, String.class );
@@ -32,14 +32,14 @@ public class LoginService {
     }
 
     public String logoutUser() {
-        String logoutUrl = "http://localhost:8080/api/auth/signout";
+        String logoutUrl = "http://client-backend:8080/api/auth/signout";
         ResponseEntity<String> response = restTemplate.postForEntity( logoutUrl, null, String.class );
 
         return response.getBody();
     }
 
     public String registerNewUser( String username, String password ) {
-        String registrationUrl = "http://localhost:8080/api/auth/signup";
+        String registrationUrl = "http://client-backend:8080/api/auth/signup";
         ApplicationUser applicationUser = new ApplicationUser( username, password );
 
         ResponseEntity<String> response = restTemplate.postForEntity( registrationUrl, applicationUser, String.class );
