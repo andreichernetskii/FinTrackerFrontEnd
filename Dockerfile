@@ -9,10 +9,10 @@ RUN ./mvnw clean install
 
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /opt/app
-COPY --from=builder /opt/app/target/*.jar /opt/app/
+COPY --from=builder /opt/app/target/*.jar /opt/app/app.jar
 
 EXPOSE 8081
-ENTRYPOINT ["java","-jar","/*.jar"]
+ENTRYPOINT ["java","-jar","/app.jar"]
 
 #ARG JAR_FILE=target/FinMangerFrontEnd-0.0.1-SNAPSHOT.jar
 #COPY ${JAR_FILE} app.jar
