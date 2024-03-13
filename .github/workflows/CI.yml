@@ -46,4 +46,4 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: orcxus/test_repo_mk1:latest
+        tags: orcxus/fin_man_front_end:latest
