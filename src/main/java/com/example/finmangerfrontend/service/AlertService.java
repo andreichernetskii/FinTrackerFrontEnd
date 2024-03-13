@@ -15,7 +15,7 @@ public class AlertService {
     }
 
     public List<Alert> getAlerts() {
-        String url = "http://localhost:8080/api/v1/alerts/";
+        String url = "http://client-backend:8080/api/v1/alerts/";
         return restTemplate.getForObject( url, List.class );
     }
 }

@@ -14,7 +14,7 @@ public class CategoryService {
     }
 
     public List<String> getCategories() {
-        String url = "http://localhost:8080/api/v1/transactions/categories?";
+        String url = "http://client-backend:8080/api/v1/transactions/categories?";
         List<String> categories = restTemplate.getForObject( url, List.class );
         return categories;
     }

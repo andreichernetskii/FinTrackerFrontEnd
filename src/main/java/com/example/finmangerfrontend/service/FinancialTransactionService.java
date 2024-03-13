@@ -19,20 +19,20 @@ public class FinancialTransactionService {
     }
 
     public void senNewFinancialTransaction( FinancialTransaction financialTransaction ) {
-        restTemplate.postForEntity( "http://localhost:8080/api/v1/transactions/", financialTransaction, String.class );
+        restTemplate.postForEntity( "http://client-backend:8080/api/v1/transactions/", financialTransaction, String.class );
     }
 
     public void deleteFinancialTransaction( Long id ) {
-        restTemplate.delete( "http://localhost:8080/api/v1/transactions/" + id );
+        restTemplate.delete( "http://client-backend:8080/api/v1/transactions/" + id );
     }
 
     public void updateFinancialTransaction( FinancialTransaction financialTransaction ) {
-        restTemplate.put( "http://localhost:8080/api/v1/transactions/", financialTransaction );
+        restTemplate.put( "http://client-backend:8080/api/v1/transactions/", financialTransaction );
     }
 
     public List<FinancialTransaction> getFinancialTransactions( FilterParameters filterParameters ) {
         String filter = filterParameters.getParamsAsURL();
-        String url = "http://localhost:8080/api/v1/transactions/" + filter;
+        String url = "http://client-backend:8080/api/v1/transactions/" + filter;
 
         ResponseEntity<List<FinancialTransaction>> responseEntity = restTemplate.exchange(
                 url,
@@ -44,13 +44,13 @@ public class FinancialTransactionService {
     }
 
     public Double getAnnualBalance( FilterParameters filterParameters ) {
-        String url = "http://localhost:8080/api/v1/transactions/annual?" + filterParameters.getParamsAsURL();
+        String url = "http://client-backend:8080/api/v1/transactions/annual?" + filterParameters.getParamsAsURL();
         Double response = restTemplate.getForObject( url, Double.class );
         return response;
     }
 
     public List<String> getTransactionTypes() {
-        String url = "http://localhost:8080/api/v1/transactions/types";
+        String url = "http://client-backend:8080/api/v1/transactions/types";
         return restTemplate.getForObject( url, List.class );
     }
 
