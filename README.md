@@ -31,5 +31,6 @@ _Edit dialog_
 ![edit-dialog](https://github.com/andreichernetskii/FinMangerFrontEnd/assets/73879364/0cf6fa72-ccce-437c-9eeb-6aa88eed8d26)
 
 ### How it works
-- Client adress - localhost:8081.
-- Client side of application conects to server side (localhost:8080) via RestTemplate object. 
+Now the project works with Docker Compose. To run the project, simply grab the docker-compose.yml file from the project's backend repository and execute docker-compose up.
+Backend side: https://github.com/andreichernetskii/FinManagerBackEnd
+ 
