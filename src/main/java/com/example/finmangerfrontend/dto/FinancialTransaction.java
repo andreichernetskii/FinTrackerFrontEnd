@@ -20,7 +20,7 @@ public class FinancialTransaction {
         this.date = date;
     }
 
-    // getter'y są wymagane przez bibliotekę Jackson:
+    // Getters for the Jackson library
 
     public Long getId() {
         return id;
@@ -42,7 +42,7 @@ public class FinancialTransaction {
         return date;
     }
 
-    // setter'y są potrzebne dla biblioteki Thymeleaf:
+    // Setters for the Thymeleaf:
 
     public void setId( Long id ) {
         this.id = id;

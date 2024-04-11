@@ -41,10 +41,12 @@ public class FilterParameters {
 
     public String getParamsAsURL() {
         StringBuilder stringBuilder = new StringBuilder("?");
+
         if ( year != null && !year.isEmpty() ) stringBuilder.append( "year=" ).append( year ).append( "&" );
         if ( month != null && !month.isEmpty() ) stringBuilder.append( "month=" ).append( month ).append( "&" );
         if ( financialTransactionType != null && !financialTransactionType.isEmpty() ) stringBuilder.append( "financialTransactionType=" ).append( financialTransactionType ).append( "&" );
         if ( category != null && !category.isEmpty() ) stringBuilder.append( "category=" ).append( category ).append( "&" );
+
         return stringBuilder.toString();
     }
 }
