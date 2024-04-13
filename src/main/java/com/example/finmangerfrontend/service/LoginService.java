@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-// todo: zmienić nazwę
 @Service
 public class LoginService {
     private final RestTemplate restTemplate;
@@ -49,14 +48,7 @@ public class LoginService {
 
     // for showing in the upper right corner
     public String getUsernameForShow() {
-        String body = null;
-
-        for ( ClientHttpRequestInterceptor interceptor : restTemplate.getInterceptors() ) {
-            if ( interceptor instanceof StatefulRestTemplateInterceptor ) {
-                body = ((StatefulRestTemplateInterceptor) interceptor).getBody();
-            }
-        }
-
-        return body;
+        String getNameUrl = "http://client-backend:8080/api/auth/username";
+        return restTemplate.getForObject( getNameUrl, String.class );
     }
 }

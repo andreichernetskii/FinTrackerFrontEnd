@@ -19,16 +19,19 @@ public class HomeController {
     private final LimitsService limitsService;
     private final CategoryService categoryService;
     private final AlertService alertService;
+    private final LoginService loginService;
 
     public HomeController( FinancialTransactionService transactionService,
                            LimitsService limitsService,
                            CategoryService categoryService,
-                           AlertService alertService ) {
+                           AlertService alertService,
+                           LoginService loginService ) {
 
         this.transactionService = transactionService;
         this.limitsService = limitsService;
         this.categoryService = categoryService;
         this.alertService = alertService;
+        this.loginService = loginService;
     }
 
     // Handler method for displaying the home page
@@ -43,6 +46,7 @@ public class HomeController {
         List<Alert> alerts = alertService.getAlerts();
         List<Limit> limits = limitsService.getLimits();
         List<String> limitTypes = limitsService.getLimitTypes();
+        String username = loginService.getUsernameForShow();
 
         // Adding information to the model
         model.addAttribute( "filter", filterParameters );
@@ -54,6 +58,7 @@ public class HomeController {
         model.addAttribute( "limits", limits );
         model.addAttribute( "categories", categories );
         model.addAttribute( "limitTypes", limitTypes );
+        model.addAttribute( "username", username );
 
         return "index";
     }
