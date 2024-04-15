@@ -82,8 +82,8 @@ td, th {
 }
 
 .user-instr-elements {
-    /*display: inline-block;*/
-    float: right;
+    display: inline-block;
+    /*float: right;*/
 }
 
 #dialog {
