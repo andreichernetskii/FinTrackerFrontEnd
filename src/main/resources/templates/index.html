@@ -94,11 +94,14 @@
 
         <div id="user-instruments" class="inner-zone">
 
-            <div th:text="${username}"></div>
+            <div class="user-instr-elements" th:text="${username}">username</div>
 
-            <form action="/logout-user" method="post">
-                <button type="submit" id="logoutBtn">Logout</button>
-            </form>
+            <div class="user-instr-elements">
+                <form action="/logout-user" method="post">
+                    <button type="submit" id="logoutBtn">Logout</button>
+                </form>
+            </div>
+
 
         </div>
 
