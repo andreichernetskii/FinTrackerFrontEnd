@@ -75,7 +75,7 @@ public class HomeController {
     // Handler method for adding a new financial transaction
     @PostMapping( "/add-transaction" )
     public String sendNewFinancialTransaction( FinancialTransaction financialTransaction ) {
-        transactionService.senNewFinancialTransaction( financialTransaction );
+        transactionService.sendNewFinancialTransaction( financialTransaction );
         return "redirect:/"; // Redirect to the home page after addition
     }
 
