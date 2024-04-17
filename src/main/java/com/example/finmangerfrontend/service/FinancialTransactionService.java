@@ -1,6 +1,6 @@
 package com.example.finmangerfrontend.service;
 
-import com.example.finmangerfrontend.configuration.GlobalValuesConfig;
+import com.example.finmangerfrontend.configuration.AppValuesConfig;
 import com.example.finmangerfrontend.dto.FilterParameters;
 import com.example.finmangerfrontend.dto.FinancialTransaction;
 import org.springframework.core.ParameterizedTypeReference;
@@ -14,31 +14,31 @@ import java.util.List;
 @Service
 public class FinancialTransactionService {
     private final RestTemplate restTemplate;
-    private final GlobalValuesConfig globalValuesConfig;
+    private final AppValuesConfig appValuesConfig;
 
-    public FinancialTransactionService( RestTemplate restTemplate, GlobalValuesConfig globalValuesConfig ) {
+    public FinancialTransactionService( RestTemplate restTemplate, AppValuesConfig appValuesConfig ) {
         this.restTemplate = restTemplate;
-        this.globalValuesConfig = globalValuesConfig;
+        this.appValuesConfig = appValuesConfig;
     }
 
     public void sendNewFinancialTransaction( FinancialTransaction financialTransaction ) {
-        String addNewTransactionUrl = globalValuesConfig.getMainUrl() + "/api/v1/transactions/";
+        String addNewTransactionUrl = appValuesConfig.getMainUrl() + "/api/v1/transactions/";
         restTemplate.postForEntity( addNewTransactionUrl, financialTransaction, String.class );
     }
 
     public void deleteFinancialTransaction( Long id ) {
-        String deleteTransactionUrl = globalValuesConfig.getMainUrl() + "/api/v1/transactions/";
+        String deleteTransactionUrl = appValuesConfig.getMainUrl() + "/api/v1/transactions/";
         restTemplate.delete( deleteTransactionUrl + id );
     }
 
     public void updateFinancialTransaction( FinancialTransaction financialTransaction ) {
-        String updateTransactionUrl = globalValuesConfig.getMainUrl() + "/api/v1/transactions/";
+        String updateTransactionUrl = appValuesConfig.getMainUrl() + "/api/v1/transactions/";
         restTemplate.put( updateTransactionUrl, financialTransaction );
     }
 
     public List<FinancialTransaction> getFinancialTransactions( FilterParameters filterParameters ) {
         String filter = filterParameters.getParamsAsURL();
-        String getTransactionsListUrl = globalValuesConfig.getMainUrl() + "/api/v1/transactions/";
+        String getTransactionsListUrl = appValuesConfig.getMainUrl() + "/api/v1/transactions/";
         String url = getTransactionsListUrl + filter;
 
         ResponseEntity<List<FinancialTransaction>> responseEntity = restTemplate.exchange(
@@ -51,14 +51,14 @@ public class FinancialTransactionService {
     }
 
     public Double getAnnualBalance( FilterParameters filterParameters ) {
-        String getAnnualBalanceUrl = globalValuesConfig.getMainUrl() + "/api/v1/transactions/annual?";
+        String getAnnualBalanceUrl = appValuesConfig.getMainUrl() + "/api/v1/transactions/annual?";
         String url = getAnnualBalanceUrl + filterParameters.getParamsAsURL();
         Double response = restTemplate.getForObject( url, Double.class );
         return response;
     }
 
     public List<String> getTransactionTypes() {
-        String getTransactionTypesUrl = globalValuesConfig.getMainUrl() + "/api/v1/transactions/types";
+        String getTransactionTypesUrl = appValuesConfig.getMainUrl() + "/api/v1/transactions/types";
         return restTemplate.getForObject( getTransactionTypesUrl, List.class );
     }
 

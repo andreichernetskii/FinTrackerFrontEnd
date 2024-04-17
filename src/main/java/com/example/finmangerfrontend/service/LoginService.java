@@ -1,7 +1,7 @@
 package com.example.finmangerfrontend.service;
 
 import com.example.finmangerfrontend.dto.ApplicationUser;
-import com.example.finmangerfrontend.configuration.GlobalValuesConfig;
+import com.example.finmangerfrontend.configuration.AppValuesConfig;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -9,15 +9,15 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class LoginService {
     private final RestTemplate restTemplate;
-    private final GlobalValuesConfig globalValuesConfig;
+    private final AppValuesConfig appValuesConfig;
 
-    public LoginService( RestTemplate restTemplate, GlobalValuesConfig globalValuesConfig ) {
+    public LoginService( RestTemplate restTemplate, AppValuesConfig appValuesConfig ) {
         this.restTemplate = restTemplate;
-        this.globalValuesConfig = globalValuesConfig;
+        this.appValuesConfig = appValuesConfig;
     }
 
     public String login( String username, String password ) {
-        String loginUrl = globalValuesConfig.getMainUrl() + "/api/auth/signin";
+        String loginUrl = appValuesConfig.getMainUrl() + "/api/auth/signin";
         ApplicationUser applicationUser = new ApplicationUser( username, password );
 
         ResponseEntity<String> response = restTemplate.postForEntity( loginUrl, applicationUser, String.class );
@@ -26,14 +26,14 @@ public class LoginService {
     }
 
     public String logoutUser() {
-        String logoutUrl = globalValuesConfig.getMainUrl() + "/api/auth/signout";
+        String logoutUrl = appValuesConfig.getMainUrl() + "/api/auth/signout";
         ResponseEntity<String> response = restTemplate.postForEntity( logoutUrl, null, String.class );
 
         return response.getBody();
     }
 
     public String registerNewUser( String username, String password ) {
-        String registrationUrl = globalValuesConfig.getMainUrl() + "/api/auth/signup";
+        String registrationUrl = appValuesConfig.getMainUrl() + "/api/auth/signup";
         ApplicationUser applicationUser = new ApplicationUser( username, password );
 
         ResponseEntity<String> response = restTemplate.postForEntity( registrationUrl, applicationUser, String.class );
@@ -43,7 +43,7 @@ public class LoginService {
 
     // for showing username in the upper right corner
     public String getUsernameForShow() {
-        String getNameUrl = globalValuesConfig.getMainUrl() + "/api/auth/username";
+        String getNameUrl = appValuesConfig.getMainUrl() + "/api/auth/username";
         return restTemplate.getForObject( getNameUrl, String.class );
     }
 }

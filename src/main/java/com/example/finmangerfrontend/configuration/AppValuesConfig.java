@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 // class for keeping some global values from application.properties file
 @Configuration
-public class GlobalValuesConfig {
+public class AppValuesConfig {
     @Value( "${app.mainUrl}" )
     private String mainUrl;
 
