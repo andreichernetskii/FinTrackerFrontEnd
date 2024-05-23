@@ -38,29 +38,33 @@ public class HomeController {
     @GetMapping( "" )
     public String showHomePage( Model model, FilterParameters filterParameters ) {
 
-        // Retrieving necessary information from backend services
-        List<FinancialTransaction> financialTransactions = transactionService.getFinancialTransactions( filterParameters );
-        Double totalAmount = transactionService.getAnnualBalance( filterParameters );
-        List<String> categories = categoryService.getCategories();
-        List<String> transactionTypes = transactionService.getTransactionTypes();
-        List<Alert> alerts = alertService.getAlerts();
-        List<Limit> limits = limitsService.getLimits();
-        List<String> limitTypes = limitsService.getLimitTypes();
-        String username = loginService.getUsernameForShow();
+        try {
+            // Retrieving necessary information from backend services
+            List<FinancialTransaction> financialTransactions = transactionService.getFinancialTransactions( filterParameters );
+            Double totalAmount = transactionService.getAnnualBalance( filterParameters );
+            List<String> categories = categoryService.getCategories();
+            List<String> transactionTypes = transactionService.getTransactionTypes();
+            List<Alert> alerts = alertService.getAlerts();
+            List<Limit> limits = limitsService.getLimits();
+            List<String> limitTypes = limitsService.getLimitTypes();
+            String username = loginService.getUsernameForShow();
 
-        // Adding information to the model
-        model.addAttribute( "filter", filterParameters );
-        model.addAttribute( "financialTransactions", financialTransactions );
-        model.addAttribute( "totalAmount", totalAmount );
-        model.addAttribute( "categories", categories );
-        model.addAttribute( "transactionTypes", transactionTypes );
-        model.addAttribute( "alerts", alerts );
-        model.addAttribute( "limits", limits );
-        model.addAttribute( "categories", categories );
-        model.addAttribute( "limitTypes", limitTypes );
-        model.addAttribute( "username", username );
+            // Adding information to the model
+            model.addAttribute( "filter", filterParameters );
+            model.addAttribute( "financialTransactions", financialTransactions );
+            model.addAttribute( "totalAmount", totalAmount );
+            model.addAttribute( "categories", categories );
+            model.addAttribute( "transactionTypes", transactionTypes );
+            model.addAttribute( "alerts", alerts );
+            model.addAttribute( "limits", limits );
+            model.addAttribute( "categories", categories );
+            model.addAttribute( "limitTypes", limitTypes );
+            model.addAttribute( "username", username );
 
-        return "index";
+            return "index";
+        } catch ( Exception e ) {
+            return "redirect:/login?error=true";
+        }
     }
 
     // Financial transactions operations

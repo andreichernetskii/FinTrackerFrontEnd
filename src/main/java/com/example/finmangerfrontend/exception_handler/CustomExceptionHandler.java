@@ -33,13 +33,17 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 //        return modelAndView;
 //    }
 
-    @ExceptionHandler( HttpClientErrorException.class )
-    public String handleAuthenticationException( HttpClientErrorException exception, Model model ) {
-        HttpStatus statusCode = ( HttpStatus ) exception.getStatusCode();
-        if ( statusCode == HttpStatus.UNAUTHORIZED || statusCode == HttpStatus.FORBIDDEN ) {
-            model.addAttribute( "errorMessage", exception.getMessage() );
-            return "redirect:/login?error=true";
-        }
-        return "redirect:/";
+//    @ExceptionHandler( HttpClientErrorException.class )
+//    public String handleAuthenticationException( HttpClientErrorException exception, Model model ) {
+//        HttpStatus statusCode = ( HttpStatus ) exception.getStatusCode();
+//        if ( statusCode == HttpStatus.UNAUTHORIZED || statusCode == HttpStatus.FORBIDDEN ) {
+//            model.addAttribute( "errorMessage", exception.getMessage() );
+//            return "redirect:/login?error=true";
+//        }
+//        return "redirect:/";
+//    }
+    @ExceptionHandler( UnauthorizedException.class )
+    protected String unauthorizedErrorHandler( UnauthorizedException exception ) {
+        return "redirect:/login?error=true";
     }
 }
