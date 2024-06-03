@@ -1,7 +1,9 @@
 package com.example.finmangerfrontend.controller;
 
+import com.example.finmangerfrontend.dto.RegistrationForm;
 import com.example.finmangerfrontend.service.LoginService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -11,6 +13,8 @@ public class LoginController {
     public LoginController( LoginService loginService ) {
         this.loginService = loginService;
     }
+
+    // login page section
 
     @GetMapping( "/login" )
     public String getLoginView() {
@@ -31,16 +35,18 @@ public class LoginController {
         return "redirect:/login";
     }
 
+    // registration page section
+
     @GetMapping( "/registration" )
-    public String getRegistrationView() {
+    public String getRegistrationView( Model model ) {
+        model.addAttribute( "form", new RegistrationForm() );
         return "registration";
     }
 
     @PostMapping( "/registration" )
-    public String registerNewUser( @RequestParam( "username" ) String username,
-                                   @RequestParam( "password" ) String password ) {
+    public String registerNewUser( RegistrationForm registrationForm ) {
+        loginService.registerNewUser( registrationForm );
 
-        loginService.registerNewUser( username, password );
         return "redirect:/login";
     }
 

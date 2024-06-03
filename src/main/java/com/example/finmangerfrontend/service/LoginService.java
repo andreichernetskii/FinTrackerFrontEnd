@@ -2,6 +2,7 @@ package com.example.finmangerfrontend.service;
 
 import com.example.finmangerfrontend.dto.ApplicationUser;
 import com.example.finmangerfrontend.configuration.AppValuesConfig;
+import com.example.finmangerfrontend.dto.RegistrationForm;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -32,9 +33,13 @@ public class LoginService {
         return response.getBody();
     }
 
-    public String registerNewUser( String username, String password ) {
+    public String registerNewUser( RegistrationForm registrationForm ) {
         String registrationUrl = appValuesConfig.getMainUrl() + "/api/auth/signup";
-        ApplicationUser applicationUser = new ApplicationUser( username, password );
+        ApplicationUser applicationUser = new ApplicationUser(
+                registrationForm.getUsername(),
+                registrationForm.getPassword(),
+                registrationForm.getDemo()
+        );
 
         ResponseEntity<String> response = restTemplate.postForEntity( registrationUrl, applicationUser, String.class );
 
