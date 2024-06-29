@@ -1,7 +1,14 @@
 ## Financial Tracker Web-Application (Client Side)
 > [!IMPORTANT]
 > [Website for testing](http://23.94.117.251:8081)
-> 
+
+> [!IMPORTANT]
+> Current Enhancements:
+> - Expanding test coverage with JUnit and Mockito.
+> - Initiating migration to microservices architecture to enhance scalability and modularity.
+> - Implementing Kafka for asynchronous messaging and event-driven communication between microservices.
+
+
 Backend side: https://github.com/andreichernetskii/FinManagerBackEnd
 
 ### The Genesis
