@@ -1,6 +1,6 @@
 ## Financial Tracker Web-Application (Client Side)
 > [!IMPORTANT]
-> [Website for testing](http://23.94.117.251:8081)
+> [Website for testing](https://finman-project.duckdns.org/login)
 
 > [!IMPORTANT]
 > Current Enhancements:
