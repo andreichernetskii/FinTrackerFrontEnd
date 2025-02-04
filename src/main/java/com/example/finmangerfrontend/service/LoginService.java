@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class LoginService {
+
     private final RestTemplate restTemplate;
     private final AppValuesConfig appValuesConfig;
 

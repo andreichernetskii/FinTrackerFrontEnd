@@ -4,7 +4,11 @@ import com.example.finmangerfrontend.dto.Alert;
 import com.example.finmangerfrontend.dto.FilterParameters;
 import com.example.finmangerfrontend.dto.FinancialTransaction;
 import com.example.finmangerfrontend.dto.Limit;
-import com.example.finmangerfrontend.service.*;
+import com.example.finmangerfrontend.service.AlertService;
+import com.example.finmangerfrontend.service.CategoryService;
+import com.example.finmangerfrontend.service.FinancialTransactionService;
+import com.example.finmangerfrontend.service.LimitsService;
+import com.example.finmangerfrontend.service.LoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +19,7 @@ import java.util.List;
 // This class represents the controller for handling requests related to the home page.
 @Controller
 public class HomeController {
+
     private final FinancialTransactionService transactionService;
     private final LimitsService limitsService;
     private final CategoryService categoryService;
@@ -57,7 +62,6 @@ public class HomeController {
             model.addAttribute( "transactionTypes", transactionTypes );
             model.addAttribute( "alerts", alerts );
             model.addAttribute( "limits", limits );
-            model.addAttribute( "categories", categories );
             model.addAttribute( "limitTypes", limitTypes );
             model.addAttribute( "username", username );
 
