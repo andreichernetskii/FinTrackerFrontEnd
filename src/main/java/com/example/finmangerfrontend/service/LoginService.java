@@ -26,7 +26,7 @@ public class LoginService {
 
         ResponseEntity<String> response = restTemplate.postForEntity( loginUrl, applicationUser, String.class );
 
-        log.info("JWT: " + response.getBody());
+        log.debug("JWT: " + response.getBody());
 
         return response.getBody();
     }
