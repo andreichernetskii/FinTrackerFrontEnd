@@ -3,10 +3,12 @@ package com.example.finmangerfrontend.service;
 import com.example.finmangerfrontend.dto.ApplicationUser;
 import com.example.finmangerfrontend.configuration.AppValuesConfig;
 import com.example.finmangerfrontend.dto.RegistrationForm;
+import lombok.extern.log4j.Log4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+@Log4j
 @Service
 public class LoginService {
 
@@ -23,6 +25,8 @@ public class LoginService {
         ApplicationUser applicationUser = new ApplicationUser( username, password );
 
         ResponseEntity<String> response = restTemplate.postForEntity( loginUrl, applicationUser, String.class );
+
+        log.info("JWT: " + response.getBody());
 
         return response.getBody();
     }
