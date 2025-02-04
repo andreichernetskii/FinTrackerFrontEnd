@@ -81,6 +81,11 @@ td, th {
     background-image: url("/static/img/trash-icon.png");
 }
 
+.user-instr-elements {
+    display: inline-block;
+    /*float: right;*/
+}
+
 #dialog {
     position: absolute;
     top: 50%;

@@ -8,14 +8,18 @@
     <p>
         Enter your email, create a password, and press 'Sign Up' to register like a new user.
     </p>
-    <form action="/registration" method="post">
+    <form action="/registration" method="post" th:object="${form}">
         <div>
             <label>Login</label>
-            <input type="text" id="email_input" name="username" placeholder="Email" required><br><br>
+            <input type="email" id="email_input" name="username" placeholder="Email" th:field="*{username}" required><br><br>
 
             <label>Password</label>
-            <input type="password" id="password_input" name="password" placeholder="Password" required><br><br>
+            <input type="password" id="password_input" name="password" placeholder="Password" th:field="*{password}" required><br><br>
 
+        </div>
+        <div>
+            <input type="checkbox" id="demo_checkbox" name="demo" th:value="${true}" th:field="*{demo}" checked>
+            <label for="demo_checkbox"> Demo user (after creating the demo user, the database will automatically fill the financial transactions table for showcase purposes) </label>
         </div>
         <div>
             <button type="submit" title="Ok">Sign Up</button>
